@@ -1,2 +1,0 @@
-# ComparadorPHP
-Proyecto tercer trimestre

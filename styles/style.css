@@ -1,0 +1,357 @@
+@font-face {
+    font-family: 'VideogameFont';
+    src: url('/proyectoAPI/Fonts/PressStart2P-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Anta';
+    src: url('/proyectoAPI/Fonts/Anta-Regular.ttf') format('truetype');
+}
+
+
+body{
+	background-color: #4618ac;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1{
+    margin:20px 0 40px 0;
+    text-align: center;
+    color: white;
+    font-family: Anta;
+}
+
+/* Estilos para los juegos */
+.resultados {
+    margin:20px 60px
+}
+
+
+
+.resultados .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.resultados .game {
+    width: 23%;
+    border: 1px solid #ccc;
+    border-radius: 10%;
+    padding: 10px;
+    text-align: center;
+	cursor: pointer;
+    background-color: #270a6898;
+}
+
+.resultados .game img {
+    border-radius: 10%;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.resultados .game p {
+    font-size: 20px;
+    font-family: 'VideogameFont';
+    margin: 10px 5px;
+    color: white;
+}
+
+
+/* Estilos para los botones de slider */
+.carousel {
+	max-width: 800px;
+	margin: 0 auto;
+	display: flex;
+}
+#imagen-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+#imagen {
+    width: 100%;
+	height: 400px;
+    background-size: cover;
+    transition: background-image 0.5s ease-in-out; 
+}
+
+#nombre-juego {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.carousel #retroceder{
+    background-color: #00000000;
+    border: none;
+}
+
+
+
+.carousel #avanzar{
+    background-color: #00000000;
+    border: none;
+}
+
+.carousel #retroceder img{
+    width: 40px;
+    height: auto;
+}
+
+
+.carousel #avanzar img{
+    width: 40px;
+    height: auto;
+}
+
+.carousel #retroceder:hover{
+    background-color: #00000038;
+    transition:0.4s
+
+}
+
+.carousel #avanzar:hover{
+    background-color: #00000038;
+    transition:0.4s
+}
+
+
+/* Estilos para los botones de paginación */
+.pagination {
+    font-size: 17px;
+    text-align: center;
+    position: relative; /* Change to relative positioning */
+    margin: 0 auto; /* Center horizontally */
+    padding: 20px;
+    padding-bottom: 20px;
+    font-family: 'VideogameFont';
+}
+
+.pagination a,
+.pagination span {
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 30px; /* Adjust line height */
+    color: white;
+}
+
+.pagination a {
+    width: 35px;
+    height: 30px;
+}
+
+.pagination span {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: -5px;
+    background-color: #310988;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+    .pagination {
+        position: static; /* Change to static positioning */
+        padding-bottom: 20px; /* Reduce padding */
+    }
+    
+    .pagination a,
+    .pagination span {
+        font-size: 14px; /* Decrease font size */
+        line-height: 25px; /* Decrease line height */
+    }
+
+    .pagination a {
+        width: 30px; /* Adjusted width for smaller screens */
+        height: 25px; /* Adjusted height for smaller screens */
+    }
+
+    .pagination span {
+        width: 35px; /* Adjusted width for smaller screens */
+        height: 35px; /* Adjusted height for smaller screens */
+        line-height: 35px; /* Adjusted line height for smaller screens */
+    }
+}
+
+
+/*Info extra*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal {
+    background-color: #451ba1;
+    padding: 20px;
+    width: 70%;
+    max-width: 600px;
+    border-radius: 10px;
+    z-index: 10000;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white;
+    font-family: 'Anta';
+}
+
+.modal img {
+    border-radius: 10px;
+    width: 100%; 
+    max-width: 100%; 
+    max-height: 450px;
+    object-fit: cover;
+}
+
+.modal h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.close-modal {
+    background-color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .modal {
+        width: 90%; 
+        max-width: 90%; 
+    }
+}
+
+/*Footer*/
+footer{
+    height: 100px;
+    background-color: #280a68e3;
+    color: #b0b0b0;
+    margin-top: 50px;
+    padding: 20px;
+    border: 0;
+    text-align: center;
+}
+
+footer div {
+    margin-bottom: 10px;
+}
+footer div a {
+    color: #b0b0b0;
+    text-decoration: none;
+    margin: 0 5px;
+}
+footer div a:hover {
+    color: #ffffff;
+}
+
+/*header*/
+header {
+    background-color:#270a6898;
+    color: white;
+    padding: 10px;
+    margin-bottom: 30px;
+    overflow: auto; 
+}
+header img {
+    height: 90px;
+    width: auto;
+    float: left;
+    margin-right: 10px;
+}
+header button {
+    background-color: #1f0061; 
+    color: white;
+    padding: 20px 30px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    margin: 20px 10px;
+    border-radius: 40px;
+}
+header button:hover {
+    background-color: #3c00bd8f; 
+    transition: 0.3s;
+}
+
+
+/*containerBuscador*/
+.containerBuscador {
+    padding: 30px 60px;
+}
+
+.containerBuscador form div {
+    margin-bottom: 20px;
+}
+
+.containerBuscador label {
+    display: block;
+    font-size: 20px;
+    font-family: 'VideogameFont';
+    margin: 10px 5px;
+    color: white;
+}
+
+.containerBuscador input[type="text"],
+.containerBuscador select {
+    height: 40px;
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0 10px; 
+    color: white;
+    border-radius: 40px;
+    background-color: #1f0061;
+    font-family: 'VideogameFont';
+}
+
+.containerBuscador select {
+    height: 42px; 
+    font-family: 'VideogameFont';
+}
+
+.containerBuscador select option {
+    font-size: 16px; 
+    padding: 12px 10px;
+
+}
+
+.containerBuscador button {
+    height: 42px;
+    width: 100%; 
+    border: none;
+    margin: 0;
+    color: white;
+    background-color: #1f0061;
+    border-radius: 40px;
+    font-family: 'VideogameFont';
+}
+
+.containerBuscador button:hover {
+    background-color: #300194;
+    transition: 0.3s;
+}
+
+
