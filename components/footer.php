@@ -15,11 +15,9 @@
     <div>
         Todos los precios incluyen IVA (donde sea aplicable).
         <br>
-        <a href="">Política de Privacidad</a> | <a href="">Información legal</a> | <a href="">Acuerdo de Suscriptor a WikiGames</a>  | <a href="">Cookies</a>
+        <a href="/proyectoAPI/pages/privacidad.php">Política de Privacidad</a> | <a href="/proyectoAPI/pages/legal.php">Información legal</a>
     </div>
-    <div>
-        Acerca de WikiGames | Empleo | WikiGamesworks | Distribución de WikiGames | Soporte | Tarjetas regalo | FacebookWikiGames | X@WikiGames
-    </div>
+    
 </footer>
 </body>
 </html>

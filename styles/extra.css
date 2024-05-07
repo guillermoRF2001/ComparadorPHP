@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'Anta';
+    src: url('/proyectoAPI/Fonts/Anta-Regular.ttf') format('truetype');
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+    background-color: #270a6898;
+    padding: 20px;
+    font-family: 'Anta';
+}
+
+.content {
+    color: white;
+}
+
+h1 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: white;
+    font-size: 16px;
+}
