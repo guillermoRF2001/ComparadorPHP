@@ -1,3 +1,7 @@
+<?php 
+$opcion = "opcion2"; 
+?>
+ <?php include 'header.php'; ?>
 <?php
 $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1; // Obtener el número de página actual de la URL
 
