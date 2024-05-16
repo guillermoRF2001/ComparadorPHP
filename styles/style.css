@@ -31,59 +31,205 @@ body{
 
 
 /* Estilos para el Index */
-.InfoGeneral{
+.InfoGeneral {
     position: absolute;
-    left: 20%;
-    top: 20%;
-    border-radius: 55px;
-    width:35%;
-    height: 70%;
+    left: 15vw; 
+    top: 160px; 
+    border-radius: 50px;
+    width: 40vw; 
+    height: 35vw; 
     background-color: rgba(1, 160, 204, 1);
     color: white;
-
 }
 
-.InfoGeneral h1{
-    font-size: 2.7em;
+.InfoGeneral h1 {
+    font-size: 2.7vw; /* 4% del ancho del viewport */
     font-weight: bolder;
     font-family: 'RobotoSerif';
-    padding: 30px 7%;
+    padding: 2.5vw 0 1vw 2.5vw; /* 3% del ancho del viewport para arriba/abajo, 2% para izquierda/derecha */
     margin: 0;
     text-align: left;
 }
 
-.InfoGeneral p{
-    font-size: 1.5em;
-    
+.InfoGeneral p {
+    font-size: 1.5vw; /* 2% del ancho del viewport */
     font-family: 'RobotoSerifMedium';
-    padding: 30px 7%;
+    padding: 2vw 2.5vw; /* 3% del ancho del viewport para arriba/abajo, 2% para izquierda/derecha */
     margin: 0;
-    line-height: 2.5;
+    line-height: 1.8;
     text-align: left;
 }
 
-.InfoGeneral h2{
-    font-size: 1.5em;
+.InfoGeneral h2 {
+    font-size: 1.5vw; /* 2% del ancho del viewport */
     font-weight: bold;
     font-family: 'RobotoSerif';
-    padding: 0px 7%;
+    padding: 0 2.5vw; /* 2% del ancho del viewport para izquierda/derecha */
     margin: 0;
-    line-height: 2.5;
+    line-height: 1.5;
     text-align: left;
 }
 
-.imgInicio{
+.imgInicio {
     position: absolute;
-    width: 50%;
-    right: 3%;
-    top: 25%;
+    width: 50vw; /* 30% del ancho del viewport */
+    right: 3vw; /* 3% del ancho del viewport */
+    top: 220px; /* 25% del ancho del viewport */
+}
+
+
+@media screen and (max-width: 1060px) {
+    .InfoGeneral {
+        width: 70vw;
+        left: 15vw;
+        top: 150px;
+        height: 80vw;
+        
+    }
+    
+    .InfoGeneral h1 {
+        text-align: center;
+        font-size: 4vw;
+        padding: 3% 0 1% 3%;
+    }
+    
+    .InfoGeneral p {
+        text-align: center;
+        font-size: 2.5vw;
+        padding: 3% 4%;
+    }
+    
+    .InfoGeneral h2 {
+        text-align: center;
+        font-size: 3vw;
+        padding: 0 4%;
+    }
+    
+    .imgInicio {
+        width: 40vw;
+        left: 30vw;
+        top: 72vw;
+    }
+}
+
+
+/*Estilos Login*/
+.cuadroLog {
+    position: absolute;
+    left: 33vw; 
+    top: 13%; 
+    border-radius: 50px;
+    width: 537px; 
+    height: 576px; 
+    background-color: rgba(106, 208, 252, 1);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: 'RobotoMono';
+}
+
+.cuadroLog h2 {
+    font-size: 57.6px;
+    font-weight: bold;
+    font-family: 'RobotoMono';
+    padding: 38.4px 0 0 0; 
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.cuadroLog input[type='email'],input[type='password']{
+    
+    font-size: 19px; 
+    font-weight: bold;
+    font-family: 'RobotoMono';
+    padding: 15.36px 48px; 
+    width: 70%;
+    border-radius: 50px;
+    border: none;
+    background-color: rgba(217, 217, 217, 1);
+    color: black;
+    margin: 25px 38px;
+    letter-spacing: 1px;
+    
+}
+
+.cuadroLog input[type='password']{
+    
+    font-size: 19px; 
+    font-weight: bold;
+    font-family: 'RobotoMono';
+    padding: 15.36px 48px; 
+    width: 70%;
+    border-radius: 50px;
+    border: none;
+    background-color: rgba(217, 217, 217, 1);
+    color: black;
+    margin: 10px 38px;
+    letter-spacing: 1px;
+    
+}
+
+.cuadroLog ::placeholder{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f007";
+    word-spacing: 2vw;
+    color: black;
+    opacity: 1;
+    letter-spacing: 2px;
+}
+
+.cuadroLog .remember {
+    display: flex;
+    flex-direction: row;
+}
+
+.cuadroLog input[type='checkbox'] {
+    height: 20px;
+    width: 20px;
+    margin: 1vw 0 0 4.7vw;
+  
+}
+
+.cuadroLog label {
+    font-size: 20px;
+    margin: 16px 15px;
+    
+}
+
+.cuadroLog button{
+    font-size: 28px;
+    color: white;
+    background-color: rgba(0, 170, 242, 1);
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    font-weight: bold;
+    margin: 40px 0 30px 31%;
+}
+
+.cuadroLog p{
+    text-align: center;
+    margin: 10px 0;
+    text-decoration: none;
+}
+
+.cuadroLog p a{
+    color: white;
+    text-decoration: none;
+}
+
+.cuadroLog p:hover{
+    font-weight: bold;
 }
 
 /* Estilos para los juegos */
 .resultados {
     margin:20px 60px
 }
-
 
 
 .resultados .row {
