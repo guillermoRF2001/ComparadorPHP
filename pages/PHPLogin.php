@@ -16,26 +16,26 @@
 
 <div class="cuadroLog">
     <h2>Login</h2>
-    <form action="login.php" method="post">
-    <div>
-        <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
-    </div>
-    <div>
-        <input type="password" id="password" name="password" placeholder=" Password" required>
-    </div>
-    <div class="remember">
-        <input type="checkbox" id="remember" name="remember"> 
-        <label for="remember">Remember me</label>
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-    <p><a href="">Forgot your password?</a></p>
-    <p><a href="/ComparadorPHP/pages/PHPSignUp.php">Dont have an account?</a></p>
-</form>
+    <form id="loginForm">
+        <div>
+            <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
+        </div>
+        <div>
+            <input type="password" id="password" name="password" placeholder=" Password" required>
+        </div>
+        <div class="remember">
+            <input type="checkbox" id="remember" name="remember"> 
+            <label for="remember">Remember me</label>
+        </div>
+        <div>
+            <button type="button" onclick="login()">Login</button>
+        </div>
+        <p><a href="/ComparadorPHP/pages/RecuperrPassword.php">Forgot your password?</a></p>
+        <p><a href="/ComparadorPHP/pages/PHPSignUp.php">Dont have an account?</a></p>
+    </form>
 </div>
 
-
+<script src="/ComparadorPHP/scripts/login.js"></script>
 
 </body>
 </html>  

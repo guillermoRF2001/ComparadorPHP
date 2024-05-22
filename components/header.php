@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 <body>  
     <header>
-        <img src="./img/logo.png" alt="logo">
+        <img src="/ComparadorPHP/img/logo.png" alt="logo">
         <?php if ($opcion === "opcionNew"): ?>
             
             <button onclick="window.location.href='/ComparadorPHP/pages/PHPSignUp.php'" class="button1">Sign Up</button>
@@ -15,6 +15,7 @@
 
 
         <?php elseif ($opcion === "opcion2"): ?>
+             <input type="text" id="search-box" placeholder="Buscar...">
             <button>Usuario</button>
         <?php endif; ?>
     </header>

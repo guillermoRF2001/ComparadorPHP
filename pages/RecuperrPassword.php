@@ -15,25 +15,20 @@
 
 
 <div class="cuadroLog">
-    <h2>Sign Up</h2>
-    <form id="signupForm" action="/ComparadorPHP/pages/PHPLogin.php" method="post">
+    <h2>Recuperate Password</h2>
+    <p>Please enter the email address associated with your account, and we'll send you instructions on how to reset your password.</p>
+    <form id="CheckEmail"   >
     <div>
         <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
     </div>
     <div>
-        <input type="password" id="password" name="password" placeholder=" Password" required>
+        <button type="submit">Send</button>
     </div>
-    <div>
-        <input type="password" id="password2" name="passwor2d" placeholder=" Repeat_Password" required>
-    </div>
-    <div>
-        <button type="submit">Sign Up</button>
-    </div>
-    <p><a href="/ComparadorPHP/pages/PHPLogin.php">Already have an account?</a></p>
 </form>
 </div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/ComparadorPHP/scripts/Password_checker.js"></script>
+<script src="/ComparadorPHP/scripts/RecoverPassword.js"></script>
 </body>
 </html>  

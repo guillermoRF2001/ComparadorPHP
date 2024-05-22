@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- Variable que indica el tio de header que queremos -->
+    <!-- Variable que indica el tipo de header que queremos -->
     <?php 
     $opcion = "opcionNew"; 
     ?>
@@ -26,6 +26,6 @@
         </p>
         <h2>¡Haz que la tecnología trabaje para ti</br> hoy mismo!</h2>
     </div>
-    <img src="img/imgInicio.webp" alt="imagen" class="imgInicio">
+    <img src="/ComparadorPHP/img/imgInicio.webp" alt="imagen" class="imgInicio">
 </body>
 </html>
