@@ -1,34 +1,72 @@
 <?php
-// Verificar si se ha enviado el formulario
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar que se han enviado los datos necesarios
-    if (isset($_POST["correo"]) && isset($_POST["password"]) && isset($_POST["password2"])) {
-        // Validar que las contraseñas coincidan
-        if ($_POST["password"] !== $_POST["password2"]) {
-            echo "<script>alert('Las contraseñas no coinciden');</script>";
-        } else {
-            // Conectar a la base de datos
-            require_once 'Database.php'; // Asegúrate de que el archivo Database.php tenga la lógica de conexión a la base de datos
+// Incluir el archivo de configuración
+include './BDconfig.php';
 
-            // Crear una instancia de la clase Database y conectar
-            $db = new Database();
-            $pdo = $db->connect();
+// Verificar si el formulario fue enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtener los datos del formulario
+    $email = $_POST['username'];
+    $password = $_POST['password'];
+    $password2 = $_POST['password2'];
 
-            // Crear instancia de la clase Usuario
-            require_once 'Usuario.php';
-
-            $usuario = new Usuario($pdo);
-
-            // Obtener los datos del formulario
-            $correo = $_POST["correo"];
-            $password = $_POST["password"];
-            $role = 'user';
-
-            // Insertar usuario
-            $usuario->insertarUsuario($correo, $password, $role);
-        }
-    } else {
-        echo "<script>alert('Todos los campos son requeridos');</script>";
+    // Verificar que las contraseñas coincidan
+    if ($password !== $password2) {
+        echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Las contraseñas no coinciden'
+                }).then(() => {
+                    window.history.back();
+                });
+              </script>";
+        exit;
     }
+
+    // Encriptar la contraseña
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Preparar la consulta SQL
+    $sql = "INSERT INTO usuario (email, password, role) VALUES (?, ?, 'user')";
+
+    // Preparar la declaración
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // Vincular los parámetros
+        mysqli_stmt_bind_param($stmt, "ss", $email, $hashed_password);
+
+        // Ejecutar la declaración
+        try {
+            if (mysqli_stmt_execute($stmt)) {
+                // Redirigir al usuario a PHPLogin.php
+                header("Location: /ComparadorPHP/pages/PHPLogin.php");
+                exit;
+            }
+        } catch (mysqli_sql_exception $exception) {
+            // Verificar si el error es por duplicado de correo electrónico
+            if ($exception->getCode() == 1062) {
+                // Redirigir a phpSignUp.php con mensaje de error
+                header("Location: /ComparadorPHP/pages/phpSignUp.php?error=Este+correo+electrónico+ya+está+registrado");
+                exit;
+            }
+        }
+
+        // Cerrar la declaración
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al preparar la declaración: " . mysqli_error($conn) . "'
+                }).then(() => {
+                    window.history.back();
+                });
+              </script>";
+    }
+
+    // Cerrar la conexión
+    mysqli_close($conn);
 }
 ?>

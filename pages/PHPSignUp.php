@@ -12,28 +12,40 @@
 </head>
 <body>
 
-
-
 <div class="cuadroLog">
     <h2>Sign Up</h2>
-    <form id="signupForm" action="/ComparadorPHP/pages/PHPLogin.php" method="post">
-    <div>
-        <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
-    </div>
-    <div>
-        <input type="password" id="password" name="password" placeholder=" Password" required>
-    </div>
-    <div>
-        <input type="password" id="password2" name="passwor2d" placeholder=" Repeat_Password" required>
-    </div>
-    <div>
-        <button type="submit">Sign Up</button>
-    </div>
-    <p><a href="/ComparadorPHP/pages/PHPLogin.php">Already have an account?</a></p>
-</form>
+    <form id="signupForm" action="/ComparadorPHP/components/registrar_usuario.php" method="post">
+        <div>
+            <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
+        </div>
+        <div>
+            <input type="password" id="password" name="password" placeholder=" Password" required>
+        </div>
+        <div>
+            <input type="password" id="password2" name="password2" placeholder=" Repeat_Password" required>
+        </div>
+        <div>
+            <button type="submit">Sign Up</button>
+        </div>
+        <p><a href="/ComparadorPHP/pages/PHPLogin.php">Already have an account?</a></p>
+    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/ComparadorPHP/scripts/Password_checker.js"></script>
+<?php
+// Verificar si hay un mensaje de error en la URL
+if (isset($_GET['error'])) {
+    $error_message = $_GET['error'];
+    // Mostrar el mensaje de error usando JavaScript
+    echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '$error_message'
+            });
+          </script>";
+}
+?>
 </body>
-</html>  
+</html>

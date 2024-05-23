@@ -1,3 +1,16 @@
+<?php
+// Iniciar sesión
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['idUsuario'])) {
+    // Si no está autenticado, redirigir a la página de inicio de sesión
+    header("Location: /ComparadorPHP/pages/phpLogin.php");
+    exit;
+}
+
+// El usuario está autenticado, puedes mostrar el contenido protegido aquí
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +22,6 @@
  
 </head>
 <body>
-
-    <!-- Variable que indica el tio de header que queremos -->
-    <?php 
-    $opcion = "opcionUser"; 
-    ?>
     <!-- Header -->
     <?php include '../components/header.php'?>
 

@@ -10,10 +10,6 @@
 </head>
 <body>
 
-    <!-- Variable que indica el tipo de header que queremos -->
-    <?php 
-    $opcion = "opcionNew"; 
-    ?>
     <!-- Header -->
     <?php include 'components/header.php'?>
 
