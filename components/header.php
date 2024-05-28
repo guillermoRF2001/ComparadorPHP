@@ -1,6 +1,4 @@
 <?php
-// Iniciar sesión
-
 // Obtener el rol del usuario desde la sesión
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : 'guest';
 

@@ -1,3 +1,17 @@
+<?php
+// Iniciar sesión
+session_start();
+
+// Verificar si el usuario está autenticado
+if (isset($_SESSION['idUsuario'])) {
+    // Si no está autenticado, redirigir a la página de inicio de sesión
+    header("Location: /ComparadorPHP/pages/home.php");
+    exit;
+}
+
+// El usuario no está autenticado, puedes mostrar el contenido
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
