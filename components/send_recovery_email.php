@@ -20,8 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Define el mensaje que deseas imprimir en la consola del navegador
-$mensaje = ;
+$mensaje = "hola";
 
 // Genera un script JavaScript que imprimirá el mensaje en la consola del navegador
 echo "<script>console.log('" . $mensaje . "');</script>";
-?>

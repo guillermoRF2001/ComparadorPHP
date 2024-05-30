@@ -10,7 +10,6 @@ if (!isset($_SESSION['idUsuario'])) {
     header("Location: /ComparadorPHP/pages/phpLogin.php");
     exit;
 }
-
 if (isset($_GET['id1']) && isset($_GET['id2'])) {
     $id1 = $_GET['id1'];
     $id2 = $_GET['id2'];
@@ -21,7 +20,22 @@ if (isset($_GET['id1']) && isset($_GET['id2'])) {
 
     $result1 = $conn->query($sql1);
     $result2 = $conn->query($sql2);
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compu</title>
+    <link rel="icon" href="/ComparadorPHP/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/ComparadorPHP/styles/style.css">
+    <script src="/ComparadorPHP/scripts/selectComputer.js"></script>
+</head>
+<body>
+<?php include '../components/header.php'?>
+
+<?php
     if ($result1->num_rows > 0 && $result2->num_rows > 0) {
         $laptop1 = $result1->fetch_assoc();
         $laptop2 = $result2->fetch_assoc();
@@ -49,4 +63,8 @@ if (isset($_GET['id1']) && isset($_GET['id2'])) {
 
 // Close the connection
 $conn->close();
+
 ?>
+
+</body>
+</html>
