@@ -1,18 +1,768 @@
-.fondo {
 
-    position: relative;
-    width: 100%;
-    height: auto;    
-
+@font-face {
+    font-family: 'RobotoMono';
+    src: url('../Fonts/RobotoMono.ttf') format('truetype');
 }
 
-.fondo img {
+@font-face {
+    font-family: 'RobotoSerif';
+    src: url('../Fonts/RobotoSerif.ttf') format('truetype');
+}
 
-    width: 100%;
-    height: auto;
+@font-face {
+    font-family: 'RobotoSerifMedium';
+    src: url('../Fonts/RobotoSerifMe.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RobotoSerifLight';
+    src: url('../Fonts/RobotoSerifLi.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Righteous';
+    src: url('../Fonts/Righteous-Regular.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Sansation';
+    src: url('../Fonts/Sansation_Regular.ttf') format('truetype');
+}
+
+
+
+
+body{
+	background-image: url("../img/background.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Estilos para el Index */
+.InfoGeneral {
+    position: absolute;
+    left: 15vw; 
+    top: 160px; 
+    border-radius: 50px;
+    width: 40vw; 
+    height: 35vw; 
+    background-color: rgba(1, 160, 204, 1);
+    color: white;
+}
+
+.InfoGeneral h1 {
+    font-size: 2.7vw; /* 4% del ancho del viewport */
+    font-weight: bolder;
+    font-family: 'RobotoSerif';
+    padding: 2.5vw 0 1vw 2.5vw; /* 3% del ancho del viewport para arriba/abajo, 2% para izquierda/derecha */
+    margin: 0;
+    text-align: left;
+}
+
+.InfoGeneral p {
+    font-size: 1.5vw; /* 2% del ancho del viewport */
+    font-family: 'RobotoSerifMedium';
+    padding: 2vw 2.5vw; /* 3% del ancho del viewport para arriba/abajo, 2% para izquierda/derecha */
+    margin: 0;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.InfoGeneral h2 {
+    font-size: 1.5vw; /* 2% del ancho del viewport */
+    font-weight: bold;
+    font-family: 'RobotoSerif';
+    padding: 0 2.5vw; /* 2% del ancho del viewport para izquierda/derecha */
+    margin: 0;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.imgInicio {
+    position: absolute;
+    width: 50vw; /* 30% del ancho del viewport */
+    right: 3vw; /* 3% del ancho del viewport */
+    top: 220px; /* 25% del ancho del viewport */
+}
+
+
+@media screen and (max-width: 1060px) {
+    .InfoGeneral {
+        width: 70vw;
+        left: 15vw;
+        top: 150px;
+        height: 80vw;
+        
+    }
+    
+    .InfoGeneral h1 {
+        text-align: center;
+        font-size: 4vw;
+        padding: 3% 0 1% 3%;
+    }
+    
+    .InfoGeneral p {
+        text-align: center;
+        font-size: 2.5vw;
+        padding: 3% 4%;
+    }
+    
+    .InfoGeneral h2 {
+        text-align: center;
+        font-size: 3vw;
+        padding: 0 4%;
+    }
+    
+    .imgInicio {
+        width: 40vw;
+        left: 30vw;
+        top: 72vw;
+    }
+}
+
+
+/*Estilos Login*/
+.cuadroLog {
+    position: absolute;
+    left: 33vw; 
+    top: 13%; 
+    border-radius: 50px;
+    width: 537px; 
+    height: 576px; 
+    background-color: rgba(106, 208, 252, 1);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: 'RobotoMono';
+}
+
+.cuadroLog h2 {
+    font-size: 57.6px;
+    font-weight: bold;
+    font-family: 'RobotoMono';
+    padding: 38.4px 0 0 0; 
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.cuadroLog input[type='email'],input[type='password']{
+    
+    font-size: 19px; 
+    font-weight: bold;
+    font-family: 'RobotoMono';
+    padding: 15.36px 48px; 
+    width: 70%;
+    border-radius: 50px;
+    border: none;
+    background-color: rgba(217, 217, 217, 1);
+    color: black;
+    margin: 25px 38px;
+    letter-spacing: 1px;
     
 }
 
+.cuadroLog input[type='password']{
+    
+    font-size: 19px; 
+    font-weight: bold;
+    font-family: 'RobotoMono';
+    padding: 15.36px 48px; 
+    width: 70%;
+    border-radius: 50px;
+    border: none;
+    background-color: rgba(217, 217, 217, 1);
+    color: black;
+    margin: 10px 38px;
+    letter-spacing: 1px;
+    
+}
+
+.cuadroLog ::placeholder{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f007";
+    word-spacing: 2vw;
+    color: black;
+    opacity: 1;
+    letter-spacing: 2px;
+}
+
+.cuadroLog .remember {
+    display: flex;
+    flex-direction: row;
+}
+
+.cuadroLog input[type='checkbox'] {
+    height: 20px;
+    width: 20px;
+    margin: 1vw 0 0 4.7vw;
+}
+
+.cuadroLog label {
+    font-size: 20px;
+    margin: 16px 15px;
+    
+}
+
+.cuadroLog button{
+    font-size: 28px;
+    color: white;
+    background-color: rgba(0, 170, 242, 1);
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    font-weight: bold;
+    margin: 40px 0 30px 31%;
+}
+
+.cuadroLog p{
+    text-align: center;
+    margin: 10px 0;
+    text-decoration: none;
+}
+
+.cuadroLog p a{
+    color: white;
+    text-decoration: none;
+}
+
+.cuadroLog p:hover{
+    font-weight: bold;
+}
+
+/*Estilos Home*/
+.containerBody {
+    background-color: rgba(255, 255, 255, 0.42);
+    border-radius: 15px;
+    width: 90%;
+    margin: 5vw auto 2vw auto;
+    padding: 50px;
+    font-family: 'Righteous';
+}
+.containerBody .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.containerBody .card {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 20vw;
+    height: 20vw;
+    margin: 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerBody .card-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+.containerBody .card .imgCard {
+    width: 70%;
+    position: relative;
+}
+
+.containerBody .botonComparar {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 186, 219, 0.86);
+    border: none;
+    border-radius: 10px;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+.containerBody .botonComparar:hover {
+    background-color: rgba(0, 109, 129, 0.86);
+}
+
+.selected {
+    background-color: rgba(1, 60, 70, 0.86);;
+}
+
+
+.containerBody .botonComparar img{
+    width: 100%;
+    
+}
+
+.containerBody .stars {
+    color: gold;
+    font-size: 40px;
+}
+
+/* Estilos para los botones de paginación */
+.pagination {
+    font-size: 17px;
+    text-align: center;
+    position: relative; 
+    margin: 0 auto; /* Center horizontally */
+    padding-bottom: 20px;
+    font-family: 'Righteous';
+}
+
+.pagination a,
+.pagination span {
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    line-height: 30px; 
+    color: white;
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+.pagination a {
+    width: 35px;
+    height: 30px;
+    background-color: rgba(0, 186, 203, 1);
+}
+
+.pagination span {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: -5px;
+    background-color: rgba(3, 126, 223, 1); 
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+    .pagination {
+        position: static; /* Change to static positioning */
+        padding-bottom: 20px; /* Reduce padding */
+    }
+    
+    .pagination a,
+    .pagination span {
+        font-size: 14px; /* Decrease font size */
+        line-height: 25px; /* Decrease line height */
+    }
+
+    .pagination a {
+        width: 30px; /* Adjusted width for smaller screens */
+        height: 25px; /* Adjusted height for smaller screens */
+    }
+
+    .pagination span {
+        width: 35px; /* Adjusted width for smaller screens */
+        height: 35px; /* Adjusted height for smaller screens */
+        line-height: 35px; /* Adjusted line height for smaller screens */
+    }
+}
+
+
+/*Info extra*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal {
+    background-color: #451ba1;
+    padding: 20px;
+    width: 70%;
+    max-width: 600px;
+    max-height: 100%;
+    border-radius: 10px;
+    z-index: 10000;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white;
+    font-family: 'Anta';
+}
+
+.modal img {
+    border-radius: 10px;
+    width: 100%; 
+    max-width: 100%; 
+    max-height: 370px;
+    object-fit: cover;
+}
+
+.modal h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.close-modal {
+    background-color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .modal {
+        width: 90%; 
+        max-width: 90%; 
+    }
+}
+
+/*Footer*/
+footer{
+    height: 100px;
+    background-color: #280a68e3;
+    color: #b0b0b0;
+    margin-top: 50px;
+    padding: 20px;
+    border: 0;
+    text-align: center;
+}
+
+footer div {
+    margin-bottom: 10px;
+}
+footer div a {
+    color: #b0b0b0;
+    text-decoration: none;
+    margin: 0 5px;
+}
+footer div a:hover {
+    color: #ffffff;
+}
+
+/*header*/
+header {
+    background-color:rgba(0, 0, 0, 0.11);   
+    color: white;
+    padding: 10px;
+    margin-bottom: 30px;
+    overflow: auto; 
+    height: 63px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+header .headerIzq{
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    transition: 1s;
+}
+header .headerIzq i{
+    margin: 10px 20px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+header .headerIzq i:hover{
+    transition: 0.3s;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+header .headerIzq p{
+    font-family: 'Righteous';
+    font-size: 40px;    
+    margin: 6px 5px;
+    text-shadow: -1px 6px 6px rgba(0,0,0,0.31)
+    ;
+}
+
+header img {
+    height: 63px;
+    width: auto;
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+header .headerDer{
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+header .headerDer .buscador{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+header .headerDer select{
+    border: 0px;
+    border-right: 1px solid rgba(0, 0, 0, 0.463);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin: 4px 0;
+    height: 51px;
+    width: 170px;
+    font-size: 24px;
+    font-family: 'Sansation';
+    padding-left: 7px;
+
+    background-image: url(/ComparadorPHP/img/arrow.png); /*aquí deberás escribir la ruta de la imagen que utilizarás como flecha del desplegable*/
+    background-repeat: no-repeat;
+    background-position: right center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    background-size: 15%;
+    background-position: 94% 12px;
+
+}
+
+
+header .headerDer input{
+    border: 0px;
+    border-right: 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: 4px 0;
+    height: 51px;
+    width: 500px;
+    font-size: 24px;
+    font-family: 'Sansation';
+    padding-left: 20px;
+}
+
+header .button3 {
+    position: absolute;
+    right: 100px;
+    background-color: rgba(4, 181, 208, 0.66); 
+    color: black;
+    width: 106px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    margin: 13px 10px;
+    border-radius:13px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'RobotoMono';
+}
+
+.button4 {
+    background-color: rgba(4, 205, 239, 1); 
+    color: black;
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    margin: 5px 20px;
+    border-radius:25px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'RobotoMono';
+}
+
+header .button1 {
+    position: absolute;
+    right: 160px;
+    background-color: rgba(0, 186, 203, 1); 
+    color: white;
+    width: 106px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    margin: 13px 10px;
+    border-radius:13px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'RobotoMono';
+}
+
+header .button2 {
+    position: absolute;
+    right: 30px;
+    background-color: rgba(3, 126, 223, 1); 
+    color: white;
+    width: 106px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    margin: 13px 10px;
+    border-radius:13px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'RobotoMono';
+}
+
+
+
+header .button1:hover {
+    background-color: rgb(27, 137, 147); 
+    transition: 0.3s;
+}
+
+header .button2:hover {
+    background-color: rgb(0, 79, 140); 
+    transition: 0.3s;
+}
+
+header .button3:hover {
+    background-color: rgba(0, 203, 234, 0.66); 
+    transition: 0.3s;
+}
+
+
+.hidden-option{
+    display: none;
+}    
+
+
+
+/*caja oculta derecha*/
+.rightBox {
+    display: none; /* Inicialmente oculto */
+    width: 25vw;
+    height: 100vh; 
+    background-color: rgba(225, 243, 255, 1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2); 
+    overflow-y: auto; 
+}
+
+.fondoOculto {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+
+/* Estilos para el contenido de la caja */
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    border-bottom:1px solid rgba(0, 0, 0, 0.5);
+    width: 100%;
+    padding: 20px;
+}
+
+.titulo img {
+    height: 63px;
+    width: auto;
+    float: left;
+    margin-right: 10px;
+}
+
+.titulo p {
+    margin: 0;
+    font-size: 40px;
+    font-family: 'Righteous';
+    color: #000; /* Asegúrate de que el texto sea visible */
+}
+
+.titulo i {
+    position: absolute;
+    right: 30px ;
+    font-size: 50px;
+    color: #000; 
+    cursor: pointer;
+}
+
+
+.titulo i :hover{
+    transition: 0.3s;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.medlinks {
+    display: flex;
+    align-items: left;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.medlinks .fila{
+    display: flex;
+    align-items: left;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 80%;
+    cursor: pointer;
+    margin-left: 20px;
+
+    border-bottom: 1px solid transparent;
+}
+
+.medlinks .fila p{
+    font-family: 'RobotoMono';
+    font-size: 35px;
+    margin: 20px 0 0 0;
+}
+
+
+.medlinks .fila i{
+    opacity: 70%;
+    font-size: 35px;
+    margin: 30px 0 0 20px;
+
+    -moz-transition: all 0.25s ease-out;
+    -ms-transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    -webkit-transition: all 0.25s ease-out;
+}
+
+
+.medlinks .fila:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.468);
+    transition: 0.6s;
+}
+.medlinks .fila:hover i{
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+}
+
+
+.medlinks .infoExtra{
+    display: none;
+    margin: 20px 0 0 60px;
+}
+
+//Pagina comentarios
 .rectanculoFondo {
     
     display: flex;
