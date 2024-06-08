@@ -115,7 +115,10 @@ if ($role === 'admin') {
                     <p onclick="window.location.href='/ComparadorPHP/pages/Sobremesa.php?type=precio'">Precio</p>
                 </div>
                 <div id="fila3" class="fila">
-                    <p  onclick="window.location.href='/ComparadorPHP/pages/comentarios.php'">Comentar</p>
+                    <p  onclick="window.location.href='/ComparadorPHP/pages/writeComentarios.php'">Comentar</p>
+                </div>
+                <div id="fila4" class="fila">
+                    <p  onclick="window.location.href='/ComparadorPHP/pages/opiniones.php'">Opiniones</p>
                 </div>
             </div>
         </div>
