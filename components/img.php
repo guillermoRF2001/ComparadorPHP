@@ -20,7 +20,7 @@ if(isset($_POST["submit"])){
             $imgContent = mysqli_real_escape_string($conn, file_get_contents($image)); 
          
             // Update image content into database 
-            $result = mysqli_query($conn, "UPDATE portatil SET imagen = '$imgContent' WHERE id <= 4");
+            $result = mysqli_query($conn, "UPDATE portatil SET imagen = '$imgContent' WHERE id = 60");
              
             if($result){ 
                 $status = 'success'; 

@@ -19,10 +19,10 @@
             <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
         </div>
         <div>
-            <input type="password" id="password" name="password" placeholder=" Password" required>
+            <input type="password" id="password" name="password" placeholder=" Password" required>
         </div>
         <div>
-            <input type="password" id="password2" name="password2" placeholder=" Repeat_Password" required>
+            <input type="password" id="password2" name="password2" placeholder=" Repeat_Password" required>
         </div>
         <div>
             <button type="submit">Sign Up</button>

@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var fila2 = document.getElementById('fila2');
     var info1 = document.getElementById('info1');
     var info2 = document.getElementById('info2');
+
+
+    const profileContainer = document.getElementById('cajaUserDrop');
+    const dropdownMenu = document.getElementById('dropHeader');
+
+
     if (mostrarCajaBtn) {
         mostrarCajaBtn.addEventListener('click', function() {
             if (caja.style.display === 'none' || caja.style.display === '') {
@@ -59,4 +65,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     }
+
+
+    profileContainer.addEventListener('mouseleave', () => {
+        dropdownMenu.style.display = 'none';
+    });
+
+    profileContainer.addEventListener('mouseover', () => {
+        dropdownMenu.style.display = 'block';
+    });
+
+    dropdownMenu.addEventListener('mouseover', () => {
+        dropdownMenu.style.display = 'block';
+    });
+
+    dropdownMenu.addEventListener('mouseleave', () => {
+        dropdownMenu.style.display = 'none';
+    });
 });

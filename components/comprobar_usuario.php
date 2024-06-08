@@ -2,6 +2,7 @@
 // Incluir el archivo de configuración
 include './BDconfig.php';
 
+
 // Verificar si el formulario fue enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtener los datos del formulario
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['idUsuario'] = $row['idUsuario'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['role'] = $row['role'];
+                    $_SESSION['password'] =  $password;
                     header("Location: /ComparadorPHP/pages/home.php");
                     exit;
                 } else {

@@ -1,7 +1,7 @@
 <?php
 // pagination.php
 
-function renderPagination($current_page, $total_items, $items_per_page = 20) {
+function renderPagination($current_page, $total_items, $items_per_page = 20, $type = '', $pc = '', $search = '') {
     $total_pages = ceil($total_items / $items_per_page); // Calcular el número total de páginas
 
     // Ajustar el rango del bucle si estamos en la primera página
@@ -14,7 +14,14 @@ function renderPagination($current_page, $total_items, $items_per_page = 20) {
         if ($i == $current_page) {
             echo "<span class='current'>$i</span>";
         } else {
-            echo "<a href='?page=$i'>$i</a>";
+            $url = "?page=$i&type=$type";
+            if (!empty($pc)) {
+                $url .= "&pc=$pc";
+            }
+            if (!empty($search)) {
+                $url .= "&search=$search";
+            }
+            echo "<a href='$url'>$i</a>";
         }
     }
     echo '</div>';

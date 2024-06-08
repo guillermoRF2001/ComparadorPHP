@@ -4,13 +4,6 @@ include '../components/BDconfig.php';
 // Iniciar sesión
 session_start();
 
-$msg = isset($_SESSION['msg']) ? $_SESSION['msg'] : "";
-unset($_SESSION['msg']); // Limpiar el mensaje para futuras solicitudes
-
-
-
-
-
 // Verificar si el usuario está autenticado
 if (!isset($_SESSION['idUsuario'])) {
     // Si no está autenticado, redirigir a la página de inicio de sesión
@@ -18,11 +11,19 @@ if (!isset($_SESSION['idUsuario'])) {
     exit;
 }
 
-// El usuario está autenticado, puedes mostrar el contenido protegido aquí
+// Definir el orden por defecto
+$order_by = "puntuacion DESC";
 
+// Verificar si se especifica un tipo de orden personalizado
+if (isset($_GET['type']) && $_GET['type'] === 'precio') {
+    $order_by = "precio ASC";
+}
+
+// Parámetros de paginación
 $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $items_per_page = 12;
 $offset = ($page_number - 1) * $items_per_page;
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,6 @@ $offset = ($page_number - 1) * $items_per_page;
     <link rel="icon" href="/ComparadorPHP/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/ComparadorPHP/styles/style.css">
     <script src="/ComparadorPHP/scripts/selectComputer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <!-- Header -->
@@ -44,18 +44,16 @@ $offset = ($page_number - 1) * $items_per_page;
     <div class="containerBody">
         <div class="row">
             <?php
-            // Prepare the query to get the laptops for the current page
-            $sql = "(SELECT id, nombre, precio, puntuacion, imagen, 'portatil' AS categoria FROM portatil)
-                    UNION
-                    (SELECT id, nombre, precio, puntuacion, imagen, 'Sobremesa' AS categoria FROM Sobremesa)
-                    ORDER BY puntuacion DESC
+            // Preparar la consulta para obtener los portátiles de la página actual
+            $sql = "SELECT id, nombre, precio, puntuacion, imagen, 'portatil' AS categoria FROM portatil
+                    ORDER BY $order_by
                     LIMIT $items_per_page OFFSET $offset";
 
             $result = $conn->query($sql);
 
-            // Check if there are any laptops in the result
+            // Verificar si hay portátiles en el resultado
             if ($result->num_rows > 0) {
-                // Loop through each laptop and display it
+                // Loop para mostrar cada portátil
                 while($row = $result->fetch_assoc()) {
                     $id = $row['id'];
                     $nombre = $row['nombre'];
@@ -72,46 +70,21 @@ $offset = ($page_number - 1) * $items_per_page;
                     echo '</div>';
                 }
             } else {
-                echo "No se encontraron ordenadores.";
+                echo "No se encontraron portátiles.";
             }
             ?>
         </div>
     </div>
     <?php
     include '../components/pagination.php';
-            // Obtener el número total de ordenadores
-            $result = $conn->query("
-            SELECT 'portatil' AS category, COUNT(*) AS total FROM portatil
-            UNION
-            SELECT 'sobremesa' AS category, COUNT(*) AS total FROM Sobremesa
-            ");
-            $total_items = 0;
-            while ($row = $result->fetch_assoc()) {
-                $total_items += $row['total'];
-            }
+            // Obtener el número total de portátiles
+            $result = $conn->query("SELECT COUNT(*) as total FROM portatil");
+            $total_items = $result->fetch_assoc()['total'];
 
             // Mostrar paginación
-            renderPagination($page_number, $total_items, $items_per_page);
+            renderPagination($page_number, $total_items, $items_per_page, $order_by);
 
-            if ($msg === "success") {
-                echo '<script>Swal.fire("Éxito", "Ordenador eliminado con éxito", "success");</script>';
-            } elseif ($msg === "error") {
-                echo '<script>Swal.fire("Error", "Error al eliminar el ordenador. Verifica que el ID sea correcto.", "error");</script>';
-            } elseif ($msg === "invalid") {
-                echo '<script>Swal.fire("Error", "Datos de entrada no válidos", "error");</script>';
-            } 
-            
-            
-            if ($msg === "succesCreate") {
-                echo '<script>Swal.fire("Éxito", "Ordenador creado con éxito", "success");</script>';
-            } elseif ($msg === "invalidCreate") {
-                echo '<script>Swal.fire("Error", "Ordenador no creado", "error");</script>';
-            }
-
-
-
-
-            // Close the connection
+            // Cerrar la conexión
             $conn->close();
     ?>
 </body>

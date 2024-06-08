@@ -12,23 +12,20 @@
 </head>
 <body>
 
-
-
 <div class="cuadroLog">
-    <h2>Recuperate Password</h2>
-    <p>Please enter the email address associated with your account, and we'll send you instructions on how to reset your password.</p>
-    <form id="CheckEmail"   >
-    <div>
-        <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
-    </div>
-    <div>
-        <button type="submit">Send</button>
-    </div>
-</form>
+    <h2>Recuperar Contraseña</h2>
+    <p>Por favor, introduce la dirección de correo electrónico asociada con tu cuenta y te enviaremos instrucciones para restablecer tu contraseña.</p>
+    <form id="CheckEmail" action="/ComparadorPHP/components/enviarCorreo.php" method="POST">
+        <div>
+            <input type="email" id="email" name="email" placeholder=" Email" autocomplete="off" required>
+        </div>
+        <div>
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/ComparadorPHP/scripts/RecoverPassword.js"></script>
+
 </body>
-</html>  
+</html>

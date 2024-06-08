@@ -1,16 +1,19 @@
 <?php
+// Incluir el archivo de configuración y establecer la conexión a la base de datos
+include '../components/BDconfig.php';
+
 // Iniciar sesión
 session_start();
 
 // Verificar si el usuario está autenticado
-if (isset($_SESSION['idUsuario'])) {
+if (!isset($_SESSION['idUsuario'])) {
     // Si no está autenticado, redirigir a la página de inicio de sesión
-    header("Location: /ComparadorPHP/pages/home.php");
+    header("Location: /ComparadorPHP/pages/phpLogin.php");
     exit;
 }
 
-// El usuario no está autenticado, puedes mostrar el contenido
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -25,27 +28,30 @@ if (isset($_SESSION['idUsuario'])) {
     <link rel="stylesheet" href="/ComparadorPHP/styles/style.css">
 </head>
 <body>
-<div class="cuadroLog">
-    <h2>Login</h2>
-    <form id="loginForm" action="/ComparadorPHP/components/comprobar_usuario.php" method="post">
+
+   <!-- Header -->
+   <?php include '../components/header.php'?>
+
+<div class="changePassword">
+    <h2>Change </br>Password</h2>
+    <form id="signupForm" action="/ComparadorPHP/components/updatePassword.php" method="post">
         <div>
-            <input type="email" id="username" name="username" placeholder=" Email" autocomplete="off" required>
-        </div>
-        <div>
-            <input type="password" id="password" name="password" placeholder=" Password" required>
-        </div>
-        <div class="remember">
-            <input type="checkbox" id="remember" name="remember"> 
-            <label for="remember">Remember me</label>
+            <input type="password" id="oldPassword" name="oldPassword" placeholder=" Old_Password" required>
         </div>
         <div>
-            <button type="submit">Login</button>
+            <input type="password" id="newPassword" name="newPassword" placeholder=" New_password" required>
         </div>
-        <p><a href="/ComparadorPHP/pages/RecuperrPassword.php">Forgot your password?</a></p>
-        <p><a href="/ComparadorPHP/pages/PHPSignUp.php">Dont have an account?</a></p>
+        <div>
+            <input type="password" id="password2" name="password2" placeholder=" Repeat_Password" required>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
     </form>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/ComparadorPHP/scripts/checkPasswordNew.js"></script>
 <?php
 // Verificar si hay un mensaje de error en la URL
 if (isset($_GET['error'])) {
