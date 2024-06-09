@@ -26,4 +26,3 @@ function renderPagination($current_page, $total_items, $items_per_page = 20, $ty
     }
     echo '</div>';
 }
-?>

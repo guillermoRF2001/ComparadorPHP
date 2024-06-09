@@ -1,6 +1,11 @@
 <?php
 // Incluir el archivo de configuración
-include './BDconfig.php';
+require '../clases/Database.php';
+require '../clases/Usuario.php';
+
+// Iniciar la base de datos
+$db = new Database();
+$usuario = new Usuario($db);
 
 // Verificar si el formulario fue enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,50 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Encriptar la contraseña
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    // Preparar la consulta SQL
-    $sql = "INSERT INTO usuario (email, password, role) VALUES (?, ?, 'user')";
-
-    // Preparar la declaración
-    $stmt = mysqli_prepare($conn, $sql);
-
-    if ($stmt) {
-        // Vincular los parámetros
-        mysqli_stmt_bind_param($stmt, "ss", $email, $hashed_password);
-
-        // Ejecutar la declaración
-        try {
-            if (mysqli_stmt_execute($stmt)) {
-                // Redirigir al usuario a PHPLogin.php
-                header("Location: /ComparadorPHP/pages/PHPLogin.php");
-                exit;
-            }
-        } catch (mysqli_sql_exception $exception) {
-            // Verificar si el error es por duplicado de correo electrónico
-            if ($exception->getCode() == 1062) {
-                // Redirigir a phpSignUp.php con mensaje de error
-                header("Location: /ComparadorPHP/pages/phpSignUp.php?error=Este+correo+electrónico+ya+está+registrado");
-                exit;
-            }
-        }
-
-        // Cerrar la declaración
-        mysqli_stmt_close($stmt);
+    // Crear el usuario
+    if ($usuario->crearUsuario($email, $password, 'user')) {
+        header("Location: /ComparadorPHP/pages/PHPLogin.php");
+        exit;
     } else {
-        echo "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error al preparar la declaración: " . mysqli_error($conn) . "'
-                }).then(() => {
-                    window.history.back();
-                });
-              </script>";
+        // Verificar si el error es por duplicado de correo electrónico
+        header("Location: /ComparadorPHP/pages/phpSignUp.php?error=Este+correo+electrónico+ya+está+registrado");
+        exit;
     }
-
+    
     // Cerrar la conexión
-    mysqli_close($conn);
+
 }
-?>

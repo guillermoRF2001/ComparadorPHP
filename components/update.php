@@ -29,12 +29,11 @@ if ($id <= 0 || empty($nombre) || empty($procesador) || empty($ram) || empty($es
     exit;
 }
 
+
 // Manejar la subida de la imagen
-// Manejar la subida de la imagen
-$imagen = null;
 if (isset($_FILES['src-file1']) && $_FILES['src-file1']['error'] === UPLOAD_ERR_OK) {
     // Obtener información del archivo
-    $fileName = $_FILES['imasrc-file1gen']['name'];
+    $fileName = $_FILES['src-file1']['name'];
     $fileTmpName = $_FILES['src-file1']['tmp_name'];
     $fileSize = $_FILES['src-file1']['size'];
     $fileType = $_FILES['src-file1']['type'];
@@ -43,13 +42,19 @@ if (isset($_FILES['src-file1']) && $_FILES['src-file1']['error'] === UPLOAD_ERR_
     $allowTypes = array('image/jpeg', 'image/png', 'image/gif');
     if (in_array($fileType, $allowTypes)) {
         // Leer el contenido del archivo y escaparlo
-        $imgContent = mysqli_real_escape_string($conn, file_get_contents($fileTmpName));
-
+        $imgContent =  file_get_contents($fileTmpName);
+        if($fileType=='image/jpeg'){
+            $imgtext = 'data:image/jpeg;base64,'.base64_encode($imgContent);
+        }elseif($fileType=='image/png'){
+            $imgtext = 'data:image/png;base64,'.base64_encode($imgContent);
+        }else{
+            $imgtext = 'data:image/gif;base64,'.base64_encode($imgContent);
+        }
         // Actualizar el contenido de la imagen en la base de datos
         if ($categoria === 'portatil') {
-            $result = mysqli_query($conn, "UPDATE portatil SET imagen = '$imgContent' WHERE id = $id");
+            $result = mysqli_query($conn, "UPDATE portatil SET imgtext = '$imgtext' WHERE id = $id");
         } elseif ($categoria === 'Sobremesa') {
-            $result = mysqli_query($conn, "UPDATE Sobremesa SET imagen = '$imgContent' WHERE id = $id");
+            $result = mysqli_query($conn, "UPDATE Sobremesa SET imgtext = '$imgtext' WHERE id = $id");
         } else {
             echo "Categoría no válida.";
             exit;

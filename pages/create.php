@@ -38,7 +38,9 @@ $conn->close();
         <!-- Formulario de edición -->
         <form class="formEdit" action="/ComparadorPHP/components/createMSQL.php" method="POST" enctype="multipart/form-data">
             <div class="editLeft">
+
                 <img class="imgEdit" src="/ComparadorPHP/img/imgNoCarga.jpg" alt="Imagen Actualizada">
+
                 <div class="file-select" id="src-file1" >
                     <input type="file" id="imagen" name="src-file1" aria-label="Archivo">
                 </div>
@@ -51,7 +53,7 @@ $conn->close();
                     }
                     ?>
                 </div>
-                <input type="hidden" id="puntuacion" name="puntuacion" value="">
+                <input type="hidden" id="puntuacion" name="puntuacion" value="0">
                 </div>
             </div>
             <div class="editRight">

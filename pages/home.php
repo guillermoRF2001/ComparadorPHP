@@ -45,9 +45,9 @@ $offset = ($page_number - 1) * $items_per_page;
         <div class="row">
             <?php
             // Prepare the query to get the laptops for the current page
-            $sql = "(SELECT id, nombre, precio, puntuacion, imagen, 'portatil' AS categoria FROM portatil)
+            $sql = "(SELECT id, nombre, precio, puntuacion, imgtext, 'portatil' AS categoria FROM portatil)
                     UNION
-                    (SELECT id, nombre, precio, puntuacion, imagen, 'Sobremesa' AS categoria FROM Sobremesa)
+                    (SELECT id, nombre, precio, puntuacion, imgtext, 'Sobremesa' AS categoria FROM Sobremesa)
                     ORDER BY puntuacion DESC
                     LIMIT $items_per_page OFFSET $offset";
 
@@ -60,13 +60,13 @@ $offset = ($page_number - 1) * $items_per_page;
                     $id = $row['id'];
                     $nombre = $row['nombre'];
                     $puntuacion = $row['puntuacion'];
-                    $imagen = base64_encode($row['imagen']);
+                    $imagen = $row['imgtext'];
                     $categoria = $row['categoria'];
                     echo '<div class="card">';
-                    echo '<img class="imgCard" src="data:image/jpeg;base64,'.$imagen.'" alt="Imagen de '.$nombre.'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
+                    echo '<img class="imgCard" src="'.$imagen.'" alt="Imagen de '.$nombre.'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
                     echo '<div class="card-details">';
                     echo '<h2><a href="/ComparadorPHP/pages/detalle.php?id='.$id.'&categoria='.$categoria.'">'.$nombre.'</a></h2>';
-                    echo '<button class="botonComparar"  id="button-'.$id.'" onclick="selectLaptop('.$id.', \''.$categoria.'\', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
+                    echo '<button class="botonComparar" data-id="'.$id.'" onclick="selectLaptop('.$id.', \''.$categoria.'\', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
                     echo '</div>';
                     echo '<div class="stars">' . str_repeat('&#9733;', $puntuacion) . str_repeat('&#9734;', 5 - $puntuacion) . '</div>';
                     echo '</div>';

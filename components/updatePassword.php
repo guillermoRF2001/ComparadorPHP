@@ -1,6 +1,7 @@
 <?php
-// Incluir el archivo de configuración
-include './BDconfig.php';
+// Incluir el archivo de configuración y la clase Usuario
+require '../clases/Database.php';
+require '../clases/Usuario.php';
 
 session_start();
 
@@ -18,76 +19,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newPassword = $_POST['newPassword'];
     $idUsuario = $_SESSION['idUsuario'];
 
-    // Preparar la consulta SQL para seleccionar el usuario por su ID
-    $sql = "SELECT password FROM usuario WHERE idUsuario = ?";
+    // Crear una instancia de la clase Usuario
+    $db = new Database();
+    $usuario = new Usuario($db);
 
-    // Preparar la declaración
-    $stmt = mysqli_prepare($conn, $sql);
+    // Obtener los datos del usuario actual por su ID
+    $userData = $usuario->obtenerUsuarioPorId($idUsuario);
 
-    if ($stmt) {
-        // Vincular los parámetros
-        mysqli_stmt_bind_param($stmt, "s", $idUsuario);
-
-        // Ejecutar la declaración
-        if (mysqli_stmt_execute($stmt)) {
-            // Obtener el resultado de la consulta
-            $result = mysqli_stmt_get_result($stmt);
-
-            // Verificar si se encontró un usuario con el ID dado
-            if ($row = mysqli_fetch_assoc($result)) {
-                // Verificar si la contraseña coincide
-                if (password_verify($oldPassword, $row['password'])) {
-                    // Generar el hash de la nueva contraseña
-                    $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-                    // Preparar la consulta SQL para actualizar la contraseña
-                    $updateSql = "UPDATE usuario SET password = ? WHERE idUsuario = ?";
-                    $updateStmt = mysqli_prepare($conn, $updateSql);
-
-                    if ($updateStmt) {
-                        // Vincular los parámetros
-                        mysqli_stmt_bind_param($updateStmt, "ss", $newHashedPassword, $idUsuario);
-
-                        // Ejecutar la declaración
-                        if (mysqli_stmt_execute($updateStmt)) {
-                            // Contraseña actualizada correctamente
-                            session_start();
-                            session_unset();
-                            session_destroy();
-                            header("Location: /ComparadorPHP/pages/PHPLogin.php?success=Contraseña+actualizada+correctamente");
-                            exit;
-                        } else {
-                            // Error al ejecutar la actualización
-                            header("Location: /ComparadorPHP/pages/changePassword.php?error=Error+al+actualizar+la+contraseña");
-                        }
-
-                        // Cerrar la declaración de actualización
-                        mysqli_stmt_close($updateStmt);
-                    } else {
-                        // Error al preparar la declaración de actualización
-                        echo "Error al preparar la declaración de actualización: " . mysqli_error($conn);
-                    }
-                } else {
-                    // La contraseña no coincide
-                    header("Location: /ComparadorPHP/pages/changePassword.php?error=Contraseña+antigua+incorrecta");
-                }
+    if ($userData) {
+        // Verificar si la contraseña coincide
+        if (password_verify($oldPassword, $userData['password'])) {
+            // Actualizar la contraseña
+            if ($usuario->actualizarPassword($idUsuario, $newPassword)) {
+                // Contraseña actualizada correctamente
+                session_start();
+                session_unset();
+                session_destroy();
+                header("Location: /ComparadorPHP/pages/PHPLogin.php?success=Contraseña+actualizada+correctamente");
+                exit;
             } else {
-                // Usuario no encontrado
-                header("Location: /ComparadorPHP/pages/changePassword.php?error=Usuario+no+encontrado");
+                // Error al ejecutar la actualización
+                header("Location: /ComparadorPHP/pages/changePassword.php?error=Error+al+actualizar+la+contraseña");
             }
         } else {
-            // Error al ejecutar la consulta
-            header("Location: /ComparadorPHP/pages/changePassword.php?error=Error+al+ejecutar+la+consulta+inténtelo+más+tarde");
+            // La contraseña no coincide
+            header("Location: /ComparadorPHP/pages/changePassword.php?error=Contraseña+antigua+incorrecta");
         }
-
-        // Cerrar la declaración
-        mysqli_stmt_close($stmt);
     } else {
-        // Error al preparar la declaración
-        echo "Error al preparar la declaración: " . mysqli_error($conn);
+        // Usuario no encontrado
+        header("Location: /ComparadorPHP/pages/changePassword.php?error=Usuario+no+encontrado");
     }
-
-    // Cerrar la conexión
-    mysqli_close($conn);
 }
 ?>

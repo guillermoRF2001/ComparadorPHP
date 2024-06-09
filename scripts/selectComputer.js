@@ -9,16 +9,19 @@ function selectLaptop(id, categoria, button) {
     // Crear un objeto portátil con id y categoría
     let laptop = { id: id, categoria: categoria };
 
-    // Verificar si el portátil ya está seleccionado
-    if (selectedLaptops.length < 2 && !selectedLaptops.some(l => l.id === id)) {
-        selectedLaptops.push(laptop);
-        localStorage.setItem('selectedLaptops', JSON.stringify(selectedLaptops));
-        button.classList.add('selected');
+    // Verificar si el portátil ya está seleccionado con la misma categoría
+    if (selectedLaptops.length < 2 && !selectedLaptops.some(l => l.id === id && l.categoria === categoria)) {
+        // Verificar si la categoría coincide con la categoría del primer elemento seleccionado (si existe)
+        if (selectedLaptops.length === 0 || selectedLaptops[0].categoria === categoria || selectedLaptops.length === 1) {
+            selectedLaptops.push(laptop);
+            localStorage.setItem('selectedLaptops', JSON.stringify(selectedLaptops));
+            button.classList.add('selected');
+        }
     }
 
     if (selectedLaptops.length === 2) {
         window.location.href = 'pagina_comparadora.php?id1=' + selectedLaptops[0].id + '&categoria1=' + selectedLaptops[0].categoria + '&id2=' + selectedLaptops[1].id + '&categoria2=' + selectedLaptops[1].categoria;
-        resetSelectedLaptops()
+        resetSelectedLaptops();
     }
 }
 
@@ -35,7 +38,7 @@ window.onload = function() {
     if (selectedLaptops) {
         selectedLaptops = JSON.parse(selectedLaptops);
         selectedLaptops.forEach(laptop => {
-            const button = document.querySelector(`.botonComparar[data-id="${laptop.id}"]`);
+            const button = document.querySelector(`.botonComparar[data-id="${laptop.id}"][data-categoria="${laptop.categoria}"]`);
             if (button) {
                 button.classList.add('selected');
             }

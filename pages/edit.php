@@ -18,9 +18,9 @@ $showDetails = $id > 0 && in_array($categoria, ['portatil', 'Sobremesa']);
 // Preparar la consulta para obtener la información del ordenador si se solicitó un ID
 if ($showDetails) {
     if ($categoria === 'portatil') {
-        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, pantalla_pulgadas, precio, imagen, puntuacion FROM portatil WHERE id = ?");
+        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, pantalla_pulgadas, precio, imgtext, puntuacion FROM portatil WHERE id = ?");
     } elseif ($categoria === 'Sobremesa') {
-        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, precio, imagen, puntuacion FROM Sobremesa WHERE id = ?");
+        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, precio, imgtext, puntuacion FROM Sobremesa WHERE id = ?");
     }
 
     $stmt->bind_param("i", $id);
@@ -40,7 +40,7 @@ if ($showDetails) {
         }
         $precio = htmlspecialchars($row['precio']);
         $puntuacion = intval($row['puntuacion']);
-        $imagen = $row['imagen'];
+        $imagen = $row['imgtext'];
     } else {
         echo "Ordenador no encontrado.";
         exit;
@@ -80,7 +80,7 @@ $conn->close();
             <div class="editLeft">
                 <?php
                 if (!empty($imagen)) {
-                    echo '<img class="imgEdit" src="data:image/jpeg;base64,'.base64_encode($imagen).'" alt="Imagen Actualizada">';
+                    echo '<img class="imgEdit" src="'.$imagen.'" alt="Imagen Actualizada">';
                 } else {
                     echo '<img class="imgEdit" src="/ComparadorPHP/img/imgNoCarga.jpg" alt="Imagen no carga">';
                 }

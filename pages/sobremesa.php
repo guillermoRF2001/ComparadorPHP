@@ -19,6 +19,9 @@ $offset = ($page_number - 1) * $items_per_page;
 // Definir el orden por defecto
 $order_by = isset($_GET['type']) && $_GET['type'] == 'precio' ? 'precio ASC' : 'puntuacion DESC';
 
+// Guardar el tipo de orden para usarlo en la paginación
+$type = isset($_GET['type']) ? $_GET['type'] : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +44,7 @@ $order_by = isset($_GET['type']) && $_GET['type'] == 'precio' ? 'precio ASC' : '
             <?php
             // Preparar la consulta para obtener los ordenadores de sobremesa de la página actual
             $sql = "
-            SELECT id, nombre, precio, puntuacion, imagen, 'Sobremesa' AS categoria FROM Sobremesa
+            SELECT id, nombre, precio, puntuacion, imgtext, 'Sobremesa' AS categoria FROM Sobremesa
             ORDER BY $order_by
             LIMIT $items_per_page OFFSET $offset";
 
@@ -54,10 +57,10 @@ $order_by = isset($_GET['type']) && $_GET['type'] == 'precio' ? 'precio ASC' : '
                     $id = $row['id'];
                     $nombre = $row['nombre'];
                     $puntuacion = $row['puntuacion'];
-                    $imagen = base64_encode($row['imagen']);
+                    $imagen = $row['imgtext'];
                     $categoria = $row['categoria'];
                     echo '<div class="card">';
-                    echo '<img class="imgCard" src="data:image/jpeg;base64,'.$imagen.'" alt="Imagen de '.$nombre.'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
+                    echo '<img class="imgCard" src="'.$imagen.'" alt="Imagen de '.$nombre.'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
                     echo '<div class="card-details">';
                     echo '<h2><a href="/ComparadorPHP/pages/detalle.php?id='.$id.'&categoria=Sobremesa">'.$nombre.'</a></h2>';
                     echo '<button class="botonComparar"  id="button-'.$id.'" onclick="selectLaptop('.$id.', \''.$categoria.'\', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
@@ -78,7 +81,7 @@ $order_by = isset($_GET['type']) && $_GET['type'] == 'precio' ? 'precio ASC' : '
             $total_items = $result->fetch_assoc()['total'];
 
             // Mostrar paginación
-            renderPagination($page_number, $total_items, $items_per_page, $order_by);
+            renderPagination($page_number, $total_items, $items_per_page, $type);
 
             // Cerrar la conexión
             $conn->close();

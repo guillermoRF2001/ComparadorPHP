@@ -95,7 +95,7 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
         echo '<div class="comparison">';
         echo '<div class="computer">';
         echo '<h2>'.$computer1['nombre'].'</h2>';
-        echo '<img src="data:image/jpeg;base64,'.base64_encode($computer1['imagen']).'" alt="Imagen de '.$computer1['nombre'].'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
+        echo '<img src="'.$computer1['imgtext'].'" alt="Imagen de '.$computer1['nombre'].'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
         echo '<div>';
         echo '<p style="'.$precioStyle1.'">Precio: '.$computer1['precio'].'</p>';
         echo '<p style="'.$puntuacionStyle1.'">Puntuación: '.$computer1['puntuacion'].'</p>';
@@ -111,7 +111,7 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
 
         echo '<div class="computer">';
         echo '<h2>'.$computer2['nombre'].'</h2>';
-        echo '<img src="data:image/jpeg;base64,'.base64_encode($computer2['imagen']).'" alt="Imagen de '.$computer2['nombre'].'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
+        echo '<img src="'.$computer2['imgtext'].'" alt="Imagen de '.$computer2['nombre'].'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
         echo '<div>';
         echo '<p style="'.$precioStyle2.'">Precio: '.$computer2['precio'].'</p>';
         echo '<p style="'.$puntuacionStyle2.'">Puntuación: '.$computer2['puntuacion'].'</p>';

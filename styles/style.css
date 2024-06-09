@@ -830,23 +830,18 @@ header .button3:hover {
 
 /*Pagina comentarios*/
 .rectanguloFondo {
-    
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
 
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-
-    background-color: rgba(255, 255, 255, 0.50); 
-    padding: 20px;
-    border-radius: 10px;
-    width: 75%;
-    height: auto;
-    padding-top: 0;
+    background-color: rgba(255, 255, 255, 0.42);
+    border-radius: 15px;
+    width: 90%;
+    margin: 2.5vw auto 2vw auto;
+    padding: 50px;
+    font-family: 'Righteous';
+    min-height: 60%;
 
 }
 
@@ -1469,19 +1464,26 @@ input[type="radio"]:checked ~ label ~ label {
 
 .comentCard .comInicio i{
     font-size: 30px;
+    margin-right: 35px;
+    background-color: rgba(3, 128, 223, 0.74);
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 45px;
 }
 
 
 .comentCard .comFecha{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center; 
-    width: 17%;
+    min-width: 17%;
     margin-top: 30px;
     font-size: 20px;
 }
 
 .comentCard .comFecha i{
     font-size: 30px;
+    margin: 0 50px 0 10px;
 }

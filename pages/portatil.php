@@ -19,6 +19,9 @@ if (isset($_GET['type']) && $_GET['type'] === 'precio') {
     $order_by = "precio ASC";
 }
 
+// Guardar el tipo de orden para usarlo en la paginación
+$type = isset($_GET['type']) ? $_GET['type'] : '';
+
 // Parámetros de paginación
 $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $items_per_page = 12;
@@ -45,7 +48,7 @@ $offset = ($page_number - 1) * $items_per_page;
         <div class="row">
             <?php
             // Preparar la consulta para obtener los portátiles de la página actual
-            $sql = "SELECT id, nombre, precio, puntuacion, imagen, 'portatil' AS categoria FROM portatil
+            $sql = "SELECT id, nombre, precio, puntuacion, imgtext, 'portatil' AS categoria FROM portatil
                     ORDER BY $order_by
                     LIMIT $items_per_page OFFSET $offset";
 
@@ -58,10 +61,10 @@ $offset = ($page_number - 1) * $items_per_page;
                     $id = $row['id'];
                     $nombre = $row['nombre'];
                     $puntuacion = $row['puntuacion'];
-                    $imagen = base64_encode($row['imagen']);
+                    $imagen = $row['imgtext'];
                     $categoria = $row['categoria'];
                     echo '<div class="card">';
-                    echo '<img class="imgCard" src="data:image/jpeg;base64,'.$imagen.'" alt="Imagen de '.$nombre.'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
+                    echo '<img class="imgCard" src="'.$imagen.'" alt="Imagen de '.$nombre.'" onerror="this.onerror=null; this.src=\'/ComparadorPHP/img/imgNoCarga.jpg\'">';
                     echo '<div class="card-details">';
                     echo '<h2><a href="/ComparadorPHP/pages/detalle.php?id='.$id.'&categoria='.$categoria.'">'.$nombre.'</a></h2>';
                     echo '<button class="botonComparar"  id="button-'.$id.'" onclick="selectLaptop('.$id.', \''.$categoria.'\', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
@@ -82,7 +85,7 @@ $offset = ($page_number - 1) * $items_per_page;
             $total_items = $result->fetch_assoc()['total'];
 
             // Mostrar paginación
-            renderPagination($page_number, $total_items, $items_per_page, $order_by);
+            renderPagination($page_number, $total_items, $items_per_page, $type);
 
             // Cerrar la conexión
             $conn->close();

@@ -28,9 +28,9 @@ $showDetails = $id > 0 && in_array($categoria, ['portatil', 'Sobremesa']);
 // Preparar la consulta para obtener la información del ordenador si se solicitó un ID
 if ($showDetails) {
     if ($categoria === 'portatil') {
-        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, pantalla_pulgadas, precio, imagen, puntuacion FROM portatil WHERE id = ?");
+        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, pantalla_pulgadas, precio, imgtext, puntuacion FROM portatil WHERE id = ?");
     } elseif ($categoria === 'Sobremesa') {
-        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, precio, imagen, puntuacion FROM Sobremesa WHERE id = ?");
+        $stmt = $conn->prepare("SELECT id, nombre, procesador, Ram, Espacio, grafica, precio, imgtext, puntuacion FROM Sobremesa WHERE id = ?");
     }
 
     $stmt->bind_param("i", $id);
@@ -50,7 +50,8 @@ if ($showDetails) {
         }
         $precio = htmlspecialchars($row['precio']);
         $puntuacion = intval($row['puntuacion']);
-        $imagen = base64_encode($row['imagen']);
+        $imagen = $row['imgtext'];
+        
     } else {
         echo "Ordenador no encontrado.";
         exit;
@@ -77,6 +78,7 @@ $conn->close();
     <title>Compu</title>
 </head>
 <body>
+
     <!-- Header -->
     <?php include '../components/header.php'?>
 
@@ -84,8 +86,9 @@ $conn->close();
     <div class="containerBody">
         <div class="details">
             <div class="infoLeft">
-            <img class="imgDetail" src="data:image/jpeg;base64,<?php echo $imagen; ?>" alt="Imagen de <?php echo $nombre; ?>" onerror="this.onerror=null; this.src='/ComparadorPHP/img/imgNoCarga.jpg';">
-                <div class="stars">
+            <img class="imgDetail" src="<?php echo $imagen; ?>" alt="Imagen de <?php echo $nombre; ?>">
+                
+            <div class="stars">
                     <?php echo str_repeat('&#9733;', $puntuacion) . str_repeat('&#9734;', 5 - $puntuacion); ?>
                 </div>
             </div>

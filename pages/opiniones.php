@@ -1,22 +1,23 @@
 <?php
-// Incluir el archivo de configuración de la base de datos
-include '../components/BDconfig.php';
+require '../clases/Database.php';
+require '../clases/Comentarios.php';
 
-// Iniciar sesión
 session_start();
 
 $msg = isset($_SESSION['msg']) ? $_SESSION['msg'] : "";
-unset($_SESSION['msg']); // Limpiar el mensaje para futuras solicitudes
+unset($_SESSION['msg']);
 
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['idUsuario'])) {
-    // Si no está autenticado, redirigir a la página de inicio de sesión
     header("Location: /ComparadorPHP/pages/phpLogin.php");
     exit;
 }
 
-// Obtener el ID del usuario de la sesión
 $idUsuario = $_SESSION['idUsuario'];
+
+$db = new Database();
+$comentarios = new Comentarios($db);
+$allComentarios = $comentarios->obtenerComentarios();
+$db->close();
 ?>
 
 <!DOCTYPE html>
@@ -32,51 +33,22 @@ $idUsuario = $_SESSION['idUsuario'];
 <body>
 <?php include '../components/header.php'?>
 
-
-<?php
-// Consulta SQL para seleccionar todas las opiniones
-$sql = "SELECT u.email, c.puntuacion, c.opinion, c.fecha 
-        FROM comentarios c 
-        INNER JOIN usuario u ON c.idUsuario = u.idUsuario";
-
-// Preparar la consulta
-$stmt = $conn->prepare($sql);
-if ($stmt) {
-    // Ejecutar la consulta
-    $stmt->execute();
-
-    // Obtener el resultado de la consulta
-    $result = $stmt->get_result();
-
-    // Comprobar si se encontraron opiniones
-    if ($result->num_rows > 0) {
-        // Mostrar las opiniones
-        echo '<div class="containerBody">';
-        while ($row = $result->fetch_assoc()) {
-            $puntuacion = $row['puntuacion'];
-            echo '<div class="comentCard">';
-            echo '<div class="comInicio">';
-            echo '<div class="userEmail"><i class="fa-regular fa-user"></i> ' . $row['email'] . '</div>';
-            echo '<div class="stars">' . str_repeat('&#9733;', $puntuacion) . str_repeat('&#9734;', 5 - $puntuacion) . '</div>';
-            echo '</div>';
-            echo $row['opinion'];
-            echo '<div class="comFecha"><i class="fa-regular fa-calendar-days"></i>' . $row['fecha']."</div>";
-            echo '</div>';
-        }
-        echo '</div>';
-    } else {
-        echo "No hay opiniones registradas.";
-    }
-
-    // Cerrar la consulta
-    $stmt->close();
-} else {
-    echo "Error en la preparación de la consulta.";
-}
-
-// Cerrar la conexión
-$conn->close();
-?>
+<div class="containerBody">
+    <?php if (!empty($allComentarios)): ?>
+        <?php foreach ($allComentarios as $comentario): ?>
+            <div class="comentCard">
+                <div class="comInicio">
+                    <div class="userEmail"><i class="fa-regular fa-user"></i> <?= $comentario['email'] ?></div>
+                    <div class="stars"><?= str_repeat('&#9733;', $comentario['puntuacion']) . str_repeat('&#9734;', 5 - $comentario['puntuacion']) ?></div>
+                </div>
+                <p><?= $comentario['opinion'] ?></p>
+                <div class="comFecha"><i class="fa-regular fa-calendar-days"></i><?= $comentario['fecha'] ?></div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No hay opiniones registradas.</p>
+    <?php endif; ?>
+</div>
 
 </body>
 </html>

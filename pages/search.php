@@ -43,19 +43,19 @@ $offset = ($page_number - 1) * $items_per_page;
 
                 if (!empty($categoria) && !empty($busqueda)) {
                     // Consultar los productos de la categoría seleccionada que coincidan con el término de búsqueda
-                    $stmt = $conn->prepare("SELECT id, nombre, precio, puntuacion, imagen FROM $categoria WHERE nombre LIKE ? LIMIT ? OFFSET ?");
+                    $stmt = $conn->prepare("SELECT id, nombre, precio, puntuacion, imgtext FROM $categoria WHERE nombre LIKE ? LIMIT ? OFFSET ?");
                     $like_busqueda = "%$busqueda%";
                     $stmt->bind_param("sii", $like_busqueda, $items_per_page, $offset);
                 } elseif (!empty($categoria) && empty($busqueda)) {
                     // Consultar los productos de la categoría seleccionada
-                    $stmt = $conn->prepare("SELECT id, nombre, precio, puntuacion, imagen FROM $categoria LIMIT ? OFFSET ?");
+                    $stmt = $conn->prepare("SELECT id, nombre, precio, puntuacion, imgtext FROM $categoria LIMIT ? OFFSET ?");
                     $stmt->bind_param("ii", $items_per_page, $offset);
                 } elseif (empty($categoria) && !empty($busqueda)) {
                     // Consultar los productos de todas las categorías que coincidan con el término de búsqueda
                     $stmt = $conn->prepare("
-                        (SELECT id, nombre, precio, puntuacion, imagen, 'portatil' AS categoriaPC FROM portatil WHERE nombre LIKE ?)
+                        (SELECT id, nombre, precio, puntuacion, imgtext, 'portatil' AS categoriaPC FROM portatil WHERE nombre LIKE ?)
                         UNION
-                        (SELECT id, nombre, precio, puntuacion, imagen, 'sobremesa' AS categoriaPC FROM Sobremesa WHERE nombre LIKE ?)
+                        (SELECT id, nombre, precio, puntuacion, imgtext, 'Sobremesa' AS categoriaPC FROM Sobremesa WHERE nombre LIKE ?)
                         ORDER BY puntuacion DESC
                         LIMIT ? OFFSET ?");
                     $like_busqueda = "%$busqueda%";
@@ -63,9 +63,9 @@ $offset = ($page_number - 1) * $items_per_page;
                 } else {
                     // Consultar los productos de todas las categorías
                     $stmt = $conn->prepare("
-                        (SELECT id, nombre, precio, puntuacion, imagen, 'portatil' AS categoriaPC FROM portatil)
+                        (SELECT id, nombre, precio, puntuacion, imgtext, 'portatil' AS categoriaPC FROM portatil)
                         UNION
-                        (SELECT id, nombre, precio, puntuacion, imagen, 'sobremesa' AS categoriaPC FROM Sobremesa)
+                        (SELECT id, nombre, precio, puntuacion, imgtext, 'Sobremesa' AS categoriaPC FROM Sobremesa)
                         ORDER BY puntuacion DESC
                         LIMIT ? OFFSET ?");
                     $stmt->bind_param("ii", $items_per_page, $offset);
@@ -79,12 +79,12 @@ $offset = ($page_number - 1) * $items_per_page;
                         $id = $row['id'];
                         $nombre = $row['nombre'];
                         $puntuacion = $row['puntuacion'];
-                        $imagen = base64_encode($row['imagen']);
+                        $imagen = $row['imgtext'];
                         echo '<div class="card">';
-                        echo '<img class="imgCard" src="data:image/jpeg;base64,'.$imagen.'" alt="Imagen de '.$nombre.'">';
+                        echo '<img class="imgCard" src="'.$imagen.'" alt="Imagen de '.$nombre.'">';
                         echo '<div class="card-details">';
                         echo '<h2><a href="/ComparadorPHP/pages/detalle.php?id='.$id.'&categoria='.$categoria.'">'.$nombre.'</a></h2>';
-                        echo '<button class="botonComparar" id="button-'.$id.'" onclick="selectLaptop('.$id.', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
+                        echo '<button class="botonComparar" data-id="'.$id.'" onclick="selectLaptop('.$id.', \''.$categoria.'\', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
                         echo '</div>';
                         echo '<div class="stars">' . str_repeat('&#9733;', $puntuacion) . str_repeat('&#9734;', 5 - $puntuacion) . '</div>';
                         echo '</div>';
@@ -94,13 +94,13 @@ $offset = ($page_number - 1) * $items_per_page;
                         $id = $row['id'];
                         $nombre = $row['nombre'];
                         $puntuacion = $row['puntuacion'];
-                        $imagen = base64_encode($row['imagen']);
+                        $imagen = $row['imgtext'];
                         $categoriaPC = $row['categoriaPC'];
                         echo '<div class="card">';
-                        echo '<img class="imgCard" src="data:image/jpeg;base64,'.$imagen.'" alt="Imagen de '.$nombre.'">';
+                        echo '<img class="imgCard" src="'.$imagen.'" alt="Imagen de '.$nombre.'">';
                         echo '<div class="card-details">';
                         echo '<h2><a href="/ComparadorPHP/pages/detalle.php?id='.$id.'&categoria='.$categoriaPC.'">'.$nombre.'</a></h2>';
-                        echo '<button class="botonComparar" id="button-'.$id.'" onclick="selectLaptop('.$id.', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
+                        echo '<button class="botonComparar" data-id="'.$id.'" onclick="selectLaptop('.$id.', \''.$categoriaPC.'\', this)"><img src="/ComparadorPHP/img/compare.png" alt="Comparador"></button>';
                         echo '</div>';
                         echo '<div class="stars">' . str_repeat('&#9733;', $puntuacion) . str_repeat('&#9734;', 5 - $puntuacion) . '</div>';
                         echo '</div>';
