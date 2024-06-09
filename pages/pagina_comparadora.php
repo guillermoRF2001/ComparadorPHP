@@ -73,10 +73,10 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
         $ramStyle1 = setBackground($computer1['Ram'], $computer2['Ram']);
         $ramStyle2 = setBackground($computer2['Ram'], $computer1['Ram']);
 
-        // Check if both computers have inches defined
+         // Check if both computers have inches defined
         $pulgadas1 = isset($computer1['pantalla_pulgadas']) ? $computer1['pantalla_pulgadas'] : '';
         $pulgadas2 = isset($computer2['pantalla_pulgadas']) ? $computer2['pantalla_pulgadas'] : '';
-
+ 
         $pulgadasStyle1 = '';
         $pulgadasStyle2 = '';
         if ($pulgadas1 && $pulgadas2) {
@@ -89,6 +89,10 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
             } else {
                 $pulgadasStyle1 = $pulgadasStyle2 = 'background-color: yellow;';
             }
+        } elseif (!$pulgadas2) {
+            $pulgadasStyle1 = 'background-color: green;';
+        } elseif (!$pulgadas1) {
+            $pulgadasStyle2 = 'background-color: green;';
         }
 
         // Mostrar los detalles de los dos ordenadores para la comparación
