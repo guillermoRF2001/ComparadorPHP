@@ -101,12 +101,6 @@ $offset = ($page_number - 1) * $items_per_page;
                 echo '<script>Swal.fire("Error", "Datos de entrada no válidos", "error");</script>';
             } 
             
-            
-            if ($msg === "succesCreate") {
-                echo '<script>Swal.fire("Éxito", "Ordenador creado con éxito", "success");</script>';
-            } elseif ($msg === "invalidCreate") {
-                echo '<script>Swal.fire("Error", "Ordenador no creado", "error");</script>';
-            }
 
 
 

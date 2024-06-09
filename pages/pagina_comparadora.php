@@ -64,6 +64,17 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
             }
         }
 
+        // Function to convert storage to GB
+        function convertirEspacioAGB($espacio) {
+            if (stripos($espacio, 'TB') !== false) {
+                return floatval($espacio) * 1024; // Convertir TB a GB
+            } elseif (stripos($espacio, 'GB') !== false) {
+                return floatval($espacio); // Dejar en GB
+            } else {
+                return 0; // Por si acaso no hay unidad especificada
+            }
+        }
+
         $precioStyle1 = setBackground($computer1['precio'], $computer2['precio']);
         $precioStyle2 = setBackground($computer2['precio'], $computer1['precio']);
 
@@ -73,10 +84,10 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
         $ramStyle1 = setBackground($computer1['Ram'], $computer2['Ram']);
         $ramStyle2 = setBackground($computer2['Ram'], $computer1['Ram']);
 
-         // Check if both computers have inches defined
+        // Check if both computers have inches defined
         $pulgadas1 = isset($computer1['pantalla_pulgadas']) ? $computer1['pantalla_pulgadas'] : '';
         $pulgadas2 = isset($computer2['pantalla_pulgadas']) ? $computer2['pantalla_pulgadas'] : '';
- 
+
         $pulgadasStyle1 = '';
         $pulgadasStyle2 = '';
         if ($pulgadas1 && $pulgadas2) {
@@ -95,6 +106,12 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
             $pulgadasStyle2 = 'background-color: green;';
         }
 
+        $espacio1 = convertirEspacioAGB($computer1['Espacio']);
+        $espacio2 = convertirEspacioAGB($computer2['Espacio']);
+
+        $espacioStyle1 = setBackground($espacio1, $espacio2);
+        $espacioStyle2 = setBackground($espacio2, $espacio1);
+
         // Mostrar los detalles de los dos ordenadores para la comparación
         echo '<div class="comparison">';
         echo '<div class="computer">';
@@ -105,10 +122,10 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
         echo '<p style="'.$puntuacionStyle1.'">Puntuación: '.$computer1['puntuacion'].'</p>';
         echo '<p style="'.$ramStyle1.'">RAM: '.$computer1['Ram'].'</p>';
         if ($categoria1 === 'portatil') {
-        echo '<p style="'.$pulgadasStyle1.'">Pulgadas: '.$pulgadas1.'</p>';
+            echo '<p style="'.$pulgadasStyle1.'">Pulgadas: '.$pulgadas1.'</p>';
         }
         echo '<p>Procesador: '.$computer1['procesador'].'</p>';
-        echo '<p>Almacenamiento: '.$computer1['Espacio'].'</p>';
+        echo '<p style="'.$espacioStyle1.'">Almacenamiento: '.$computer1['Espacio'].'</p>';
         echo '<p>Tarjeta Gráfica: '.$computer1['grafica'].'</p>';
         echo '</div>';
         echo '</div>';
@@ -121,10 +138,10 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
         echo '<p style="'.$puntuacionStyle2.'">Puntuación: '.$computer2['puntuacion'].'</p>';
         echo '<p style="'.$ramStyle2.'">RAM: '.$computer2['Ram'].'</p>';
         if ($categoria2 === 'portatil') {
-        echo '<p style="'.$pulgadasStyle2.'">Pulgadas: '.$pulgadas2.'</p>';
+            echo '<p style="'.$pulgadasStyle2.'">Pulgadas: '.$pulgadas2.'</p>';
         }
         echo '<p>Procesador: '.$computer2['procesador'].'</p>';
-        echo '<p>Almacenamiento: '.$computer2['Espacio'].'</p>';
+        echo '<p style="'.$espacioStyle2.'">Almacenamiento: '.$computer2['Espacio'].'</p>';
         echo '<p>Tarjeta Gráfica: '.$computer2['grafica'].'</p>';
         echo '</div>';
         echo '</div>';

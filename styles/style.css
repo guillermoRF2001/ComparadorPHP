@@ -292,8 +292,9 @@ body{
 
 
 .containerBody .card .imgCard {
-    width: 70%;
+    width: auto;
     position: relative;
+    max-height: 60%;
 }
 
 .containerBody .botonComparar {

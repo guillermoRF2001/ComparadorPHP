@@ -64,8 +64,8 @@ $conn->close();
                 <div>
                     <label for="categoria">Categoría:</label>
                     <select id="categoria" name="categoria" required>
+                    <option value="Sobremesa" selected>Sobremesa</option>
                         <option value="portatil" >Portátil</option>
-                        <option value="Sobremesa" selected>Sobremesa</option>
                     </select>
                 </div>
                 <div>

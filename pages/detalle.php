@@ -20,6 +20,9 @@ if ($role === 'admin') {
     $opcion = 'User';
 }
 
+$msg = isset($_SESSION['msg']) ? $_SESSION['msg'] : "";
+unset($_SESSION['msg']); // Limpiar el mensaje para futuras solicitudes
+
 // Obtener el ID del ordenador y la categoría desde el parámetro GET
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
@@ -115,5 +118,15 @@ $conn->close();
         </div>
     </div>
     <script src="/ComparadorPHP/scripts/confirmDelete.js"></script>
+
+    <?php
+                
+                if ($msg === "succesCreate") {
+                    echo '<script>Swal.fire("Éxito", "Ordenador creado con éxito", "success");</script>';
+                } elseif ($msg === "invalidCreate") {
+                    echo '<script>Swal.fire("Error", "Ordenador no creado", "error");</script>';
+                }
+    
+    ?>
 </body>
 </html>
