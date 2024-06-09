@@ -1304,6 +1304,9 @@ input[type="radio"]:checked ~ label ~ label {
 .starsEdit .star.empty {
     color: gray;
 }
+.editRight{
+    width: 43%;
+}
 
 .editRight div{
     display: flex;
@@ -1331,7 +1334,7 @@ input[type="radio"]:checked ~ label ~ label {
     font-weight: bold;
     font-family: 'RobotoMono';
     padding: 15.36px 48px; 
-    width: 50%;
+    width: 60%;
     border-radius: 50px;
     border: none;
     background-color: rgba(217, 217, 217, 1);
@@ -1344,7 +1347,7 @@ input[type="radio"]:checked ~ label ~ label {
     font-weight: bold;
     font-family: 'RobotoMono';
     padding: 15.36px 48px; 
-    width: 50%;
+    width: 60%;
     border-radius: 50px;
     border: none;
     background-color: rgba(217, 217, 217, 1);

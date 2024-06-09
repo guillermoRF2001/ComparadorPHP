@@ -64,6 +64,16 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
             }
         }
 
+        function setBackgroundMoney($val1, $val2) {
+            if ($val1 < $val2) {
+                return "background-color: green;";
+            } elseif ($val1 > $val2) {
+                return "background-color: red;";
+            } else {
+                return "background-color: yellow;";
+            }
+        }
+
         // Function to convert storage to GB
         function convertirEspacioAGB($espacio) {
             if (stripos($espacio, 'TB') !== false) {
@@ -75,8 +85,8 @@ if (isset($_GET['id1']) && isset($_GET['categoria1']) && isset($_GET['id2']) && 
             }
         }
 
-        $precioStyle1 = setBackground($computer1['precio'], $computer2['precio']);
-        $precioStyle2 = setBackground($computer2['precio'], $computer1['precio']);
+        $precioStyle1 = setBackgroundMoney($computer1['precio'], $computer2['precio']);
+        $precioStyle2 = setBackgroundMoney($computer2['precio'], $computer1['precio']);
 
         $puntuacionStyle1 = setBackground($computer1['puntuacion'], $computer2['puntuacion']);
         $puntuacionStyle2 = setBackground($computer2['puntuacion'], $computer1['puntuacion']);
