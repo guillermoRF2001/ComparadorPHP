@@ -1,7 +1,6 @@
 <?php
 include '../components/BDconfig.php';
 
-// Iniciar sesión
 session_start();
 
 // Verificar si el usuario está autenticado y es administrador
@@ -38,10 +37,9 @@ if (isset($_FILES['src-file1']) && $_FILES['src-file1']['error'] === UPLOAD_ERR_
     $fileSize = $_FILES['src-file1']['size'];
     $fileType = $_FILES['src-file1']['type'];
 
-    // Verificar el tipo MIME del archivo
     $allowTypes = array('image/jpeg', 'image/png', 'image/gif');
     if (in_array($fileType, $allowTypes)) {
-        // Leer el contenido del archivo y escaparlo
+        // Leer el contenido del archivo
         $imgContent =  file_get_contents($fileTmpName);
         if($fileType=='image/jpeg'){
             $imgtext = 'data:image/jpeg;base64,'.base64_encode($imgContent);
@@ -88,14 +86,12 @@ if ($categoria === 'portatil') {
 // Ejecutar la consulta
 if ($stmt->execute()) {
     echo "Datos actualizados correctamente.";
-    // Redirigir a la página de administración o mostrar un mensaje de éxito
     header("Location: /ComparadorPHP/pages/detalle.php?id=$id&categoria=$categoria");
-   
     exit;
 } else {
     echo "Error al actualizar los datos: " . $stmt->error;
 }
 
-// Cerrar la conexión a la base de datos
+
 $stmt->close();
 $conn->close();

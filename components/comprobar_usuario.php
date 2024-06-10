@@ -1,5 +1,4 @@
 <?php
-// Incluir el archivo de configuración
 require '../clases/Database.php';
 require '../clases/Usuario.php';
 
@@ -34,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: /ComparadorPHP/pages/PHPLogin.php?error=email+o+password+incorrectos");
     }
 
-    // Cerrar la conexión
     $db->close();
 }
 ?>

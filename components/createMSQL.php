@@ -1,7 +1,6 @@
 <?php
 include '../components/BDconfig.php';
 
-// Iniciar sesión
 session_start();
 
 // Verificar si el usuario está autenticado y es administrador
@@ -36,7 +35,6 @@ if (isset($_FILES['src-file1']) && $_FILES['src-file1']['error'] === UPLOAD_ERR_
     $fileType = $_FILES['src-file1']['type'];
     var_dump($fileType);
 
-    // Verificar el tipo MIME del archivo
     $allowTypes = array('image/jpeg', 'image/png', 'image/gif');
     if (in_array($fileType, $allowTypes)) {
         // Leer el contenido del archivo y escaparlo
@@ -56,6 +54,7 @@ if (isset($_FILES['src-file1']) && $_FILES['src-file1']['error'] === UPLOAD_ERR_
     echo 'Ha ocurrido un error al subir el archivo.';
     exit;
 }
+
 // Preparar la consulta de inserción
 if ($categoria === 'portatil') {
     $stmt = $conn->prepare("INSERT INTO portatil (nombre, procesador, Ram, Espacio, grafica, pantalla_pulgadas, precio, puntuacion, imgtext) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -73,13 +72,11 @@ if ($categoria === 'portatil') {
 if ($stmt->execute()) {
     $last_id = mysqli_insert_id($conn);
     $_SESSION['msg'] = "succesCreate";
-    // Redirigir a la página de administración o mostrar un mensaje de éxito
     header("Location: /ComparadorPHP/pages/detalle.php?id=$last_id&categoria=$categoria");
     exit;
 } else {
     $_SESSION['msg'] = "invalidCreate";
 }
 
-// Cerrar la conexión a la base de datos
 $stmt->close();
 $conn->close();

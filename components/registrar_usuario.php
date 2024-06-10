@@ -1,5 +1,5 @@
 <?php
-// Incluir el archivo de configuración
+
 require '../clases/Database.php';
 require '../clases/Usuario.php';
 
@@ -24,12 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }).then(() => {
                     window.history.back();
                 });
-              </script>";
+            </script>";
         exit;
     }
 
     // Crear el usuario
-    if ($usuario->crearUsuario($email, $password, 'user')) {
+    if ($usuario->crearUsuario($email, $password)) {
         header("Location: /ComparadorPHP/pages/PHPLogin.php");
         exit;
     } else {
@@ -38,6 +38,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
     
-    // Cerrar la conexión
 
 }

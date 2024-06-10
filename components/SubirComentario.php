@@ -32,4 +32,3 @@ if (isset($_POST['puntuacion']) && isset($_POST['comentario'])) {
     header("Location: /ComparadorPHP/pages/writeComentarios.php");
     exit;
 }
-?>

@@ -9,7 +9,7 @@ class Usuario {
 
     public function crearUsuario($email, $password) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $role = 'user'; // Fijar el rol a 'user'
+        $role = 'user'; // rol user fijo
         $sql = "INSERT INTO usuario (email, password, role) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         if ($stmt) {
@@ -53,7 +53,7 @@ class Usuario {
 
     public function actualizarUsuario($idUsuario, $email, $password) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $role = 'user'; // Fijar el rol a 'user'
+        $role = 'user'; // rol user fijo
         $sql = "UPDATE usuario SET email = ?, password = ?, role = ? WHERE idUsuario = ?";
         $stmt = $this->conn->prepare($sql);
         if ($stmt) {

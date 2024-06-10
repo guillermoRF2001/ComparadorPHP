@@ -1,7 +1,7 @@
 <?php
 include '../components/BDconfig.php';
 
-// Iniciar sesión
+
 session_start();
 
 $msg = isset($_SESSION['msg']) ? $_SESSION['msg'] : "";

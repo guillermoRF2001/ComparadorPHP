@@ -1,5 +1,4 @@
 <?php
-// Incluir el archivo de configuración y la clase Usuario
 require '../clases/Database.php';
 require '../clases/Usuario.php';
 

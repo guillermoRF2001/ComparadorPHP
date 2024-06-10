@@ -1,5 +1,4 @@
 <?php
-// Iniciar sesión
 session_start();
 
 // Verificar si el usuario está autenticado
@@ -9,7 +8,6 @@ if (isset($_SESSION['idUsuario'])) {
     exit;
 }
 
-// El usuario no está autenticado, puedes mostrar el contenido
 ?>
 
 <!DOCTYPE html>

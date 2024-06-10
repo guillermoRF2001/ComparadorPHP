@@ -6,7 +6,7 @@ class Database {
     private $password = "CgP5nagvTeoZ4oPbSban";
     public $conn;
 
-    // Constructor para establecer la conexión
+    // Constructor 
     public function __construct() {
         $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->database);
 
@@ -17,7 +17,6 @@ class Database {
         echo "<script>console.log('Connected successfully');</script>";
     }
 
-    // Método para cerrar la conexión
     public function close() {
         $this->conn->close();
     }

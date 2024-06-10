@@ -26,20 +26,15 @@ if ($id > 0 && in_array($categoria, ['portatil', 'Sobremesa'])) {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        // Redirigir con mensaje de éxito
         $_SESSION['msg'] = "success";
     } else {
-        // Redirigir con mensaje de error
         $_SESSION['msg'] = "error";
     }
 
     $stmt->close();
 } else {
-    // Redirigir con mensaje de entrada no válida
     $_SESSION['msg'] = "invalid";
 }
-
-// Cerrar la conexión a la base de datos
 $conn->close();
 header("Location: /ComparadorPHP/pages/home.php");
 exit;

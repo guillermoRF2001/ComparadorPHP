@@ -70,9 +70,6 @@ $conn->close();
 
     <!-- Main Content -->
     <div class="containerBody">
-        <!-- Mostrar la imagen -->
-        
-
         <!-- Formulario de edición -->
         <form class="formEdit" action="/ComparadorPHP/components/update.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo $id; ?>">

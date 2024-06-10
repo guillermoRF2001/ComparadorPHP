@@ -1,7 +1,6 @@
 <?php
 include '../components/BDconfig.php';
 
-// Iniciar sesión
 session_start();
 
 // Verificar si el usuario está autenticado

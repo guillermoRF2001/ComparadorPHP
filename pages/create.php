@@ -10,7 +10,6 @@ if (!isset($_SESSION['idUsuario']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-// Obtener el ID del ordenador y la categoría desde el parámetro GET
 $puntuacion = 0;
 
 // Cerrar la conexión a la base de datos
@@ -32,10 +31,7 @@ $conn->close();
 
     <!-- Main Content -->
     <div class="containerBody">
-        <!-- Mostrar la imagen -->
         
-
-        <!-- Formulario de edición -->
         <form class="formEdit" action="/ComparadorPHP/components/createMSQL.php" method="POST" enctype="multipart/form-data">
             <div class="editLeft">
 
