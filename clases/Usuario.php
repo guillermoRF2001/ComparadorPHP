@@ -8,6 +8,22 @@ class Usuario {
     }
 
     public function crearUsuario($email, $password) {
+        // Verificar si el correo electrónico ya existe
+        $sql = "SELECT idUsuario FROM usuario WHERE email = ?";
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt) {
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                // El correo electrónico ya está registrado
+                $stmt->close();
+                return 'duplicate_email';
+            }
+            $stmt->close();
+        }
+        
+        // Crear el nuevo usuario
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $role = 'user'; // rol user fijo
         $sql = "INSERT INTO usuario (email, password, role) VALUES (?, ?, ?)";

@@ -29,14 +29,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Crear el usuario
-    if ($usuario->crearUsuario($email, $password)) {
+    $resultado = $usuario->crearUsuario($email, $password);
+    if ($resultado === true) {
         header("Location: /ComparadorPHP/pages/PHPLogin.php");
         exit;
-    } else {
-        // Verificar si el error es por duplicado de correo electrónico
+    } elseif ($resultado === 'duplicate_email') {
         header("Location: /ComparadorPHP/pages/phpSignUp.php?error=Este+correo+electrónico+ya+está+registrado");
         exit;
+    } else {
+        echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error al crear el usuario'
+                }).then(() => {
+                    window.history.back();
+                });
+            </script>";
+        exit;
     }
-    
-
 }
+?>
