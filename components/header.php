@@ -111,8 +111,8 @@ if ($role === 'admin') {
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
                 <div id="info2" class="infoExtra">
-                    <p onclick="window.location.href='/ComparadorPHP/pages/Sobremesa.php?type=puntuacion%20DESC'">Populares</p>
-                    <p onclick="window.location.href='/ComparadorPHP/pages/Sobremesa.php?type=precio'">Precio</p>
+                    <p onclick="window.location.href='/ComparadorPHP/pages/sobremesa.php?type=puntuacion%20DESC'">Populares</p>
+                    <p onclick="window.location.href='/ComparadorPHP/pages/sobremesa.php?type=precio'">Precio</p>
                 </div>
                 <div id="fila3" class="fila">
                     <p  onclick="window.location.href='/ComparadorPHP/pages/writeComentarios.php'">Comentar</p>
